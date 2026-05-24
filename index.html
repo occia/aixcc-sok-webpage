@@ -1,0 +1,2181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIxCC SoK — Companion Site</title>
+<meta name="description" content="Extended appendices and open-science material for the AIxCC SoK paper.">
+<link rel="stylesheet" href="css/style.css?v=ba4f9ec4">  <!-- v=ba4f9ec4 -->
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  startup: { typeset: true }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar" id="toc">
+    <h1><a href="#top">AIxCC SoK<br><span style="font-weight:500">Companion Site</span></a></h1>
+    <p class="subtitle">Extended appendices · open-science index</p>
+    <nav><ol>
+<li class="nav-section-label">Front matter</li>
+<li><a href="#open-science">Open Science &amp; Team Collection</a></li>
+<li class="nav-section-label">Appendix sections</li>
+<li><a href="#token-consumption">C — Token Consumption</a></li>
+<li><a href="#scoring">D — Scoring Details</a></li>
+<li><a href="#sarif-techniques">E — SARIF Validation Techniques</a></li>
+<li><a href="#cp-details">F — Challenge Project (CP) Details</a></li>
+<li><a href="#cpv-details">G — Challenge Project Vulnerability (CPV) Details</a></li>
+<li><a href="#zeroday-details">H — 0-Day Details</a></li>
+<li><a href="#sarif-broadcasts">I — SARIF Broadcast Details</a></li>
+<li><a href="#submission-timing">J — Submission Timing</a></li>
+<li><a href="#cwe-analysis">K — CWE-Wise Performance</a></li>
+</ol></nav>
+  </aside>
+  <div class="toc-backdrop" aria-hidden="true"></div>
+  <button class="toc-toggle" type="button" aria-label="Open table of contents" aria-controls="toc" aria-expanded="false">☰</button>
+  <main class="content" id="top">
+
+<header class="hero">
+  <h1>AIxCC SoK — Companion Site</h1>
+  <p class="lead">
+    Extended appendices and curated open-science material for
+    <em>SoK: DARPA's AI Cyber Challenge (AIxCC) — Competition Design, Architectures, and Lessons Learned</em>.
+    Page-limit constraints in the paper push the long-form appendices off-paper;
+    this site mirrors that material so it remains browsable, citable, and searchable.
+  </p>
+  <p class="meta">
+    <a href="#open-science">Open Science &amp; Team Materials</a>
+    <a href="#token-consumption">Appendices C–K</a>
+    <!-- TODO: replace with the arXiv / USENIX PDF URL once published -->
+    <a href="https://example.com/aixcc-sok.pdf">Main paper (PDF) — <em>to be updated</em></a>
+    <a href="https://zenodo.org/records/20367274">Artifact (Zenodo)</a>
+  </p>
+</header>
+
+
+<section id="open-science">
+<h2><span class="appendix-tag">Open Science</span>Materials &amp; Team Collection<a class="anchor-link" href="#open-science">¶</a></h2>
+
+<p>
+All data, scripts, finalist team questionnaires, and meeting notes are archived in the
+SoK artifact, with this companion website indexing the artifact, the extended analysis below,
+and public finalist documentation. Competition data and the analysis framework await DARPA's
+official release.
+</p>
+
+<h3>Already available</h3>
+<ul>
+  <li><strong>SoK Artifact.</strong> Zenodo bundle containing questionnaires, meeting notes, sanitized
+      experiment data (PF / MR / CC), and analysis scripts —
+      <a href="https://zenodo.org/records/20367274">zenodo.org/records/20367274</a>.</li>
+  <li><strong>Companion website.</strong> This site (<code>github.io</code> mirror of the appendix tables).</li>
+  <li><strong>Public finalist documentation.</strong> Linked below by team.</li>
+</ul>
+
+<h3>Pending DARPA release</h3>
+<ul>
+  <li>Raw competition data (submission logs, OTEL traces, scoring breakdowns).</li>
+  <li>The official challenge sets &amp; harnesses (organizer-hosted repositories).</li>
+  <li>Reference analysis framework used by the organizers.</li>
+</ul>
+
+<h3>Team materials</h3>
+<p>
+Curated public materials from each finalist — CRS source code, technical reports, post-mortems, and blogs.
+Placeholders mark teams that have not yet released a written post-mortem or blog; this section will
+be updated as new artifacts become available.
+</p>
+
+<div class="team-list">
+<div class="team-entry">  <h4 class="team-name">    <code>AT</code>     <span class="team-name-text">Atlantis</span>     <span class="team-rank">1st</span>     <span class="team-org">— Team Atlanta</span>  </h4>  <ul class="team-links"><li><a href="https://github.com/Team-Atlanta/aixcc-afc-atlantis">CRS source code (GitHub: Team-Atlanta/aixcc-afc-atlantis)</a></li><li><a href="https://arxiv.org/abs/2509.14589">ATLANTIS: AI-driven Threat Localization, Analysis, and Triage Intelligence System (arXiv 2509.14589)</a></li><li><a href="https://arxiv.org/abs/2601.17471">PatchIsland: Orchestration of LLM Agents for Continuous Vulnerability Repair (arXiv 2601.17471)</a></li></ul></div>
+<div class="team-entry">  <h4 class="team-name">    <code>TB</code>     <span class="team-name-text">Buttercup</span>     <span class="team-rank">2nd</span>     <span class="team-org">— Trail of Bits</span>  </h4>  <ul class="team-links"><li><a href="https://github.com/trailofbits/buttercup">CRS source code (GitHub: trailofbits/buttercup)</a></li><li><a href="https://blog.trailofbits.com/categories/aixcc/">Trail of Bits blog: AIxCC posts (tag)</a></li></ul></div>
+<div class="team-entry">  <h4 class="team-name">    <code>TI</code>     <span class="team-name-text">RoboDuck</span>     <span class="team-rank">3rd</span>     <span class="team-org">— Theori</span>  </h4>  <ul class="team-links"><li><a href="https://theori-io.github.io/aixcc-public/">Theori AIxCC public materials (theori-io.github.io/aixcc-public)</a></li><li><a href="https://theori-io.github.io/aixcc-public/afc/Branch%20Flipper.pdf">Branch Flipper: Unlocking Fuzz Blockers with Coverage-Grounded LLMs</a></li></ul></div>
+<div class="team-entry">  <h4 class="team-name">    <code>FB</code>     <span class="team-name-text">FuzzingBrain</span>     <span class="team-rank">4th</span>     <span class="team-org">— FuzzingBrain</span>  </h4>  <ul class="team-links"><li class="placeholder">No public blog or post available yet.</li></ul></div>
+<div class="team-entry">  <h4 class="team-name">    <code>SP</code>     <span class="team-name-text">Artiphishell</span>     <span class="team-rank">5th</span>     <span class="team-org">— Shellphish</span>  </h4>  <ul class="team-links"><li><a href="https://support.shellphish.net/blog/2025/08/22/shellphish-x-aixcc-pm/">Shellphish × AIxCC Post-Mortem</a></li><li><a href="https://github.com/shellphish-support-syndicate/artiphishell-public">CRS source code (GitHub: shellphish-support-syndicate/artiphishell-public)</a></li></ul></div>
+<div class="team-entry">  <h4 class="team-name">    <code>42</code>     <span class="team-name-text">BugBuster</span>     <span class="team-rank">6th</span>     <span class="team-org">— 42-b3yond-6ug</span>  </h4>  <ul class="team-links"><li><a href="https://docs.google.com/document/d/1-1TexnOwQGj2KJ8rrLtk-Vgl-PqO5MZe7k0qrHQPC_0/">42-b3yond-6ug Open Letter (Google Doc)</a></li></ul></div>
+<div class="team-entry">  <h4 class="team-name">    <code>LC</code>     <span class="team-name-text">Lacrosse</span>     <span class="team-rank">7th</span>     <span class="team-org">— Lacrosse</span>  </h4>  <ul class="team-links"><li class="placeholder">No public blog or post available yet.</li></ul></div>
+</div>
+
+<p class="footnotes">
+Teams are ordered by final-round AFC score (AT → LC). Each <code>code</code>-tagged label
+is the two-letter abbreviation used throughout the paper and the tables below.
+</p>
+</section>
+
+
+<section id="token-consumption">
+<h2><span class="appendix-tag">Appendix C</span>Token Consumption Details<a class="anchor-link" href="#token-consumption">¶</a></h2>
+
+<p>
+The figures below show the per-model token consumption and the input-to-output token ratio per model.
+Token data is derived from OpenTelemetry (OTEL) logs collected by the organizers.
+As the collected data was incomplete due to the competition environment,
+the figures do not present full usage but serve as a lower-bound reference.
+</p>
+
+<div class="figure">
+  <img src="assets/figures/model_usage_by_team.png" alt="Per-model token consumption by team">
+  <p class="figure-caption"><span class="caption-label">Figure C1.</span>
+  Token consumption (input + output) per model by team.</p>
+</div>
+
+<div class="figure">
+  <img src="assets/figures/io_token_ratio_by_model_team.png" alt="Input-to-output token ratio per model by team">
+  <p class="figure-caption"><span class="caption-label">Figure C2.</span>
+  I/O token ratio per model by team.</p>
+</div>
+</section>
+
+
+<section id="scoring">
+<h2><span class="appendix-tag">Appendix D</span>Scoring Details<a class="anchor-link" href="#scoring">¶</a></h2>
+
+<p>
+The scoring system is centered around a developer-centric principle:
+reward outcomes that benefit project developers
+and penalize behaviors that would burden them.
+Organizers use this principle to determine
+when and to what extent should reward be given for each capability:
+</p>
+<ul>
+  <li>A single PoV is not highly rewarded since it only demonstrates the vulnerability;</li>
+  <li>Patches score highest as they directly solve security issues;</li>
+  <li>SARIF assessments are useful but only offer non-core, semi-subjective report validation, therefore scoring lowest;</li>
+  <li>Bundling saves developer investigation time when correct (rewarded), but largely wastes their efforts and emotions when incorrect (penalized).</li>
+</ul>
+<p>
+Based on those weights,
+organizers introduce additional scoring mechanisms, like accuracy penalty and time-decay, to
+ensure competition fairness and balance research incentives with practicality.
+</p>
+
+<h3>Team Score Hierarchy</h3>
+<p>
+A team's total score is the sum of individual challenge scores:
+</p>
+\[
+S_{\text{Team}} \;=\; \sum S_{\text{Challenge}}
+\]
+<p>Each challenge score equals the accuracy multiplier times the sum of four capability scores:</p>
+\[
+S_{\text{Challenge}} \;=\; AM \,\times\,
+\bigl(S_{\text{PoV}} + S_{\text{Patch}} + S_{\text{SARIF}} + S_{\text{Bundle}}\bigr)
+\]
+
+<h3>Accuracy Multiplier</h3>
+<p>
+The accuracy multiplier <em>AM</em> serves as a global button to
+encourage teams to balance effectiveness with reliability.
+Teams with 100% accurate submissions receive no penalty (AM = 1),
+while lower accuracy results in a reduced multiplier:
+</p>
+\[
+AM \;=\; 1 - (1-r)^4, \qquad r \;=\; \frac{n_{\text{acc}}}{n_{\text{acc}} + n_{\text{inacc}}}
+\]
+<p>
+The quartic formula strongly penalizes low accuracy to discourage impractical strategies,
+while tolerating reasonable error rates to enable research innovation.
+For instance, at 90% accuracy AM ≈ 0.9999 (nearly no penalty),
+while at 50% AM = 0.9375 and at 40% AM = 0.8704 (significant score reduction).
+</p>
+
+<p>
+Each submission is classified as accurate, inaccurate, or neutral, where neutral submissions
+do not affect accuracy calculations.
+For a given capability, the classification rationale is to
+reward correct, non-duplicate submissions,
+penalize incorrect ones,
+and not penalize partially correct or duplicate submissions that provide real-world value:
+</p>
+<ul>
+  <li><strong>PoV.</strong> One reproducible PoV per vulnerability is accurate; irreproducible PoVs are inaccurate; reproducible but duplicate PoVs are neutral, since collecting diverse PoVs can benefit patch validation in practice.</li>
+  <li><strong>Patch.</strong> First, patches that fail to apply, build, or remediate any PoV are inaccurate. Then, the patches that fail functionality tests are neutral. This considers that CRSs may not have access to full testing functionality in practice and a CI system can help catch such issues. Finally, among passing patches, a minimal covering set is selected as accurate while the rest are inaccurate.</li>
+  <li><strong>SARIF and Bundle.</strong> Only fully correct submissions are accurate; others are inaccurate.</li>
+  <li><strong>Server errors and schema mismatches.</strong> Neutral.</li>
+</ul>
+
+<h3>Time-Decayed Scoring Design</h3>
+<p>
+Teams' submissions earn fewer points over time, with up to 50% reduction at the deadline.
+\(S_{\text{PoV}}\), \(S_{\text{Patch}}\), and \(S_{\text{SARIF}}\) share a common time-decay formula:
+</p>
+\[
+\mathit{Score} \;=\; \mathit{weight} \times \tau, \qquad
+\tau \;=\; 0.5 \;+\; \frac{\text{remaining time}}{2 \times \text{total duration}}
+\]
+<p>
+where <em>remaining time</em> is from submission to deadline,
+and <em>total duration</em> is the challenge window.
+\(\tau\) ranges from 1.0 (immediate) to 0.5 (at deadline).
+The <em>weight</em> for PoV, Patch, and SARIF are 2, 6, and 1, respectively.
+For total duration, PoV and Patch submissions are measured from challenge start to deadline
+(full-mode for 12 hours while delta-mode for 6 hours), while SARIF is from broadcast time.
+</p>
+<p>
+Note that for each vulnerability, only the last submission is scored,
+so earlier submissions can be superseded by later ones,
+allowing teams to revise their submissions with a certain penalty.
+</p>
+
+<h3>Bundle Scoring</h3>
+<p>
+A bundle reports pairings among PoV, Patch, and broadcast SARIF
+that a team identifies as addressing the same vulnerability.
+Unlike other capabilities, bundles can yield negative scores:
+</p>
+\[
+S_{\text{Bundle}} \;=\; \pm \Bigl(
+  \underbrace{0.5\,(S_{\text{PoV}} + S_{\text{Patch}})}_{\text{PoV–Patch}}
+  + \underbrace{\,1\,}_{\text{PoV–SARIF}}
+  + \underbrace{\,2\,}_{\text{Patch–SARIF}}
+\Bigr)
+\]
+<p>
+The sign is positive if all claimed pairings are correct, negative if any is incorrect.
+The more correct pairings, the higher the score (up to 7 points for vulnerabilities that have a SARIF broadcast,
+4 for those without). CRS-generated SARIF may be included in bundles but does not affect scoring.
+Bundle scoring is indirectly affected by time-decay through the underlying PoV and Patch scores.
+</p>
+
+<h3>Patch Selection and Validation</h3>
+<p>
+Since a single patch may remediate multiple vulnerabilities,
+organizers must select which patches to credit.
+The selection algorithm identifies a minimal covering set: the
+smallest number of patches that collectively fix all validated vulnerabilities.
+When multiple patches cover the same vulnerability, specificity is preferred:
+patches fixing fewer vulnerabilities are chosen over broader ones,
+rewarding precise, targeted fixes. Patches not selected into this minimal set count as inaccurate.
+</p>
+<p>
+To validate whether a patch truly remediates a vulnerability,
+organizers use all PoVs submitted by all teams,
+plus organizer-created ones, as test cases.
+A patch must remediate every PoV targeting its claimed vulnerability to be considered valid.
+This cross-team validation also reflects one collaboration approach among CRSs in practice.
+</p>
+</section>
+
+
+<section id="sarif-techniques">
+<h2><span class="appendix-tag">Appendix E</span>SARIF Validation Techniques<a class="anchor-link" href="#sarif-techniques">¶</a></h2>
+
+<p>The table below summarizes how each finalist team validates broadcast SARIF reports.</p>
+
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+  <th rowspan="2">Aspect</th>
+  <th colspan="7" class="center">Teams (high → low score)</th>
+</tr>
+<tr>
+  <th class="center">AT</th><th class="center">TB</th><th class="center">TI</th>
+  <th class="center">FB</th><th class="center">SP</th><th class="center">42</th><th class="center">LC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Validation Strategy — Category</strong></td>
+  <td>PoV-centric</td><td>PoV-centric</td><td>Bug-cand-centric</td>
+  <td>PoV-centric</td><td>LLM-judge-centric</td><td>LLM-judge-centric</td><td>LLM-judge-centric</td>
+</tr>
+<tr>
+  <td><strong>Validation Strategy — Implementation<sup>*</sup></strong></td>
+  <td>LLM-Based</td><td>Heuristic-Based</td><td>LLM-Based</td>
+  <td>Heuristic-Based; LLM-Based</td><td>LLM-Based</td><td>LLM-Based</td><td>LLM-Based</td>
+</tr>
+<tr>
+  <td><strong>Pre-validation Sanity Check<sup>†</sup></strong></td>
+  <td>Format; File; Function; Line no.</td>
+  <td>Format</td>
+  <td>Format</td>
+  <td>Format</td>
+  <td>Format; File; Function</td>
+  <td>File; Function; Line no.</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td><strong>Used Inputs — SARIF Report</strong></td>
+  <td>Full Report</td>
+  <td>File; Function; StartLine; EndLine</td>
+  <td>Function; File; Description; Rule</td>
+  <td>File; StartLine; EndLine; Rule; Message</td>
+  <td>Function; File; StartLine; Rule; Message</td>
+  <td>Full Report</td>
+  <td>Full Report</td>
+</tr>
+<tr>
+  <td><strong>Used Inputs — PoV / Bug Cand Info</strong></td>
+  <td>Crash Log; Patch Diff (if available)</td>
+  <td>StackTrace (File; Function; Line)</td>
+  <td>Function; File; Description; Condition</td>
+  <td>Partial Crash Log (StackTrace; Error Message)</td>
+  <td>N/A</td>
+  <td>Crash Log</td>
+  <td>N/A</td>
+</tr>
+<tr>
+  <td><strong>Used Inputs — Code Context</strong></td>
+  <td>Surrounding Context; Dynamic Retrieval<sup>‡</sup></td>
+  <td>—</td>
+  <td>—</td>
+  <td>Enclosing Function</td>
+  <td>Dynamic Retrieval</td>
+  <td>Dynamic Retrieval</td>
+  <td>Surrounding Context</td>
+</tr>
+</tbody>
+</table></div>
+
+<p class="footnotes">
+<sup>*</sup> Heuristic-based follows developer-defined workflows; LLM-based relies on LLM queries.<br>
+<sup>†</sup> Verifies SARIF report format and checks whether referenced artifacts (files, functions or lines) exist before main validation.<br>
+<sup>‡</sup> Additional code context dynamically requested by LLM.
+</p>
+</section>
+
+
+<section id="cp-details">
+<h2><span class="appendix-tag">Appendix F</span>Challenge Project (CP) Details<a class="anchor-link" href="#cp-details">¶</a></h2>
+
+<p>
+The table lists every Challenge Project (CP) shipped in the AIxCC final round,
+including upstream commit, lines/files of delta (for delta-mode CPs), build time,
+and harness corpus size.
+</p>
+
+<div class="table-wrap"><table class="data">
+<thead><tr>
+<th>Lang</th><th>Project</th><th>Category</th><th class='num'># Harn.</th>
+<th>CP</th><th class='num'># CPVs</th><th>CWEs</th><th class='num'>SLOC</th>
+<th>Commit</th><th>Cutoff</th><th class='num'>Δ Lines</th><th class='num'>Δ Files</th>
+<th class='num'>Build</th><th class='num'>Harn. Size</th>
+</tr></thead><tbody>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/curl/curl">curl</a></td>
+<td>Network</td>
+<td class='num'>17</td>
+<td class='compact'><code>cu2▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/476.html" title="NULL Pointer Dereference">CWE-476</a></td>
+<td class='num'>238K</td>
+<td class='compact'><a href="https://github.com/curl/curl/commit/2d4852af8"><code>2d4852a</code></a></td>
+<td class='compact'>2024-12-09</td>
+<td class='num'>881</td>
+<td class='num'>24</td>
+<td class='num'>110s</td>
+<td class='num'>232.6MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/curl/curl">curl</a></td>
+<td>Network</td>
+<td class='num'>17</td>
+<td class='compact'><code>cu3▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/476.html" title="NULL Pointer Dereference">CWE-476</a></td>
+<td class='num'>238K</td>
+<td class='compact'><a href="https://github.com/curl/curl/commit/2d4852af8"><code>2d4852a</code></a></td>
+<td class='compact'>2024-12-09</td>
+<td class='num'>940</td>
+<td class='num'>25</td>
+<td class='num'>112s</td>
+<td class='num'>232.8MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/curl/curl">curl</a></td>
+<td>Network</td>
+<td class='num'>17</td>
+<td class='compact'><code>cu4▲</code></td>
+<td class='num'>2</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/476.html" title="NULL Pointer Dereference">CWE-476</a></td>
+<td class='num'>238K</td>
+<td class='compact'><a href="https://github.com/curl/curl/commit/2d4852af8"><code>2d4852a</code></a></td>
+<td class='compact'>2024-12-09</td>
+<td class='num'>1252</td>
+<td class='num'>33</td>
+<td class='num'>109s</td>
+<td class='num'>232.8MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/curl/curl">curl</a></td>
+<td>Network</td>
+<td class='num'>17</td>
+<td class='compact'><code>cu5▲</code></td>
+<td class='num'>2</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/134.html" title="Use of Externally-Controlled Format String">CWE-134</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/787.html" title="Out-of-bounds Write">CWE-787</a></td>
+<td class='num'>237K</td>
+<td class='compact'><a href="https://github.com/curl/curl/commit/2d4852af8"><code>2d4852a</code></a></td>
+<td class='compact'>2024-12-09</td>
+<td class='num'>657</td>
+<td class='num'>27</td>
+<td class='num'>112s</td>
+<td class='num'>232.3MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/curl/curl">curl</a></td>
+<td>Network</td>
+<td class='num'>17</td>
+<td class='compact'><code>cu6▲</code></td>
+<td class='num'>0</td>
+<td>—</td>
+<td class='num'>249K</td>
+<td class='compact'><a href="https://github.com/curl/curl/commit/4dacb79fc"><code>4dacb79</code></a></td>
+<td class='compact'>2025-05-28</td>
+<td class='num'>51469</td>
+<td class='num'>1132</td>
+<td class='num'>125s</td>
+<td class='num'>238.0MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/videolan/dav1d">dav1d</a></td>
+<td>Codec</td>
+<td class='num'>1</td>
+<td class='compact'><code>da1□</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/190.html" title="Integer Overflow or Wraparound">CWE-190</a></td>
+<td class='num'>261K</td>
+<td class='compact'><a href="https://github.com/videolan/dav1d/commit/08051a3b"><code>08051a3</code></a></td>
+<td class='compact'>2024-02-06</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>38s</td>
+<td class='num'>910B</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/FreeRDP/FreeRDP">freerdp</a></td>
+<td>Remote Desktop</td>
+<td class='num'>7</td>
+<td class='compact'><code>fp2▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/122.html" title="Heap-based Buffer Overflow">CWE-122</a></td>
+<td class='num'>453K</td>
+<td class='compact'><a href="https://github.com/FreeRDP/FreeRDP/commit/f1285ade4"><code>f1285ad</code></a></td>
+<td class='compact'>2025-02-11</td>
+<td class='num'>373</td>
+<td class='num'>10</td>
+<td class='num'>205s</td>
+<td class='num'>190.6MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/FreeRDP/FreeRDP">freerdp</a></td>
+<td>Remote Desktop</td>
+<td class='num'>7</td>
+<td class='compact'><code>fp3▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/123.html" title="Write-what-where Condition">CWE-123</a></td>
+<td class='num'>453K</td>
+<td class='compact'><a href="https://github.com/FreeRDP/FreeRDP/commit/f1285ade4"><code>f1285ad</code></a></td>
+<td class='compact'>2025-02-11</td>
+<td class='num'>498</td>
+<td class='num'>10</td>
+<td class='num'>209s</td>
+<td class='num'>190.6MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/FreeRDP/FreeRDP">freerdp</a></td>
+<td>Remote Desktop</td>
+<td class='num'>7</td>
+<td class='compact'><code>fp4▲</code></td>
+<td class='num'>0</td>
+<td>—</td>
+<td class='num'>463K</td>
+<td class='compact'><a href="https://github.com/FreeRDP/FreeRDP/commit/fcdf4c6c7"><code>fcdf4c6</code></a></td>
+<td class='compact'>2025-06-16</td>
+<td class='num'>20605</td>
+<td class='num'>256</td>
+<td class='num'>207s</td>
+<td class='num'>190.5MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/AOMediaCodec/libavif">libavif</a></td>
+<td>Image</td>
+<td class='num'>8</td>
+<td class='compact'><code>av2▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/126.html" title="Buffer Over-read">CWE-126</a></td>
+<td class='num'>44K</td>
+<td class='compact'><a href="https://github.com/AOMediaCodec/libavif/commit/fa089a0c"><code>fa089a0</code></a></td>
+<td class='compact'>2025-04-14</td>
+<td class='num'>1407</td>
+<td class='num'>25</td>
+<td class='num'>168s</td>
+<td class='num'>50.8MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/AOMediaCodec/libavif">libavif</a></td>
+<td>Image</td>
+<td class='num'>8</td>
+<td class='compact'><code>av3▲</code></td>
+<td class='num'>0</td>
+<td>—</td>
+<td class='num'>44K</td>
+<td class='compact'><a href="https://github.com/AOMediaCodec/libavif/commit/1aadfad9"><code>1aadfad</code></a></td>
+<td class='compact'>2025-05-09</td>
+<td class='num'>3232</td>
+<td class='num'>98</td>
+<td class='num'>207s</td>
+<td class='num'>2.4KB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/libexif/libexif">libexif</a></td>
+<td>Image</td>
+<td class='num'>2</td>
+<td class='compact'><code>ex2▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/122.html" title="Heap-based Buffer Overflow">CWE-122</a></td>
+<td class='num'>16K</td>
+<td class='compact'><a href="https://github.com/libexif/libexif/commit/30e5090"><code>30e5090</code></a></td>
+<td class='compact'>2022-04-21</td>
+<td class='num'>210</td>
+<td class='num'>12</td>
+<td class='num'>49s</td>
+<td class='num'>11.6MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/libexif/libexif">libexif</a></td>
+<td>Image</td>
+<td class='num'>2</td>
+<td class='compact'><code>ex3▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a></td>
+<td class='num'>15K</td>
+<td class='compact'><a href="https://github.com/libexif/libexif/commit/a918830"><code>a918830</code></a></td>
+<td class='compact'>2021-11-01</td>
+<td class='num'>178</td>
+<td class='num'>9</td>
+<td class='num'>50s</td>
+<td class='num'>11.7MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/GNOME/libxml2">libxml2</a></td>
+<td>Document</td>
+<td class='num'>11</td>
+<td class='compact'><code>lx3▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/122.html" title="Heap-based Buffer Overflow">CWE-122</a></td>
+<td class='num'>201K</td>
+<td class='compact'><a href="https://github.com/GNOME/libxml2/commit/71c37a56"><code>71c37a5</code></a></td>
+<td class='compact'>2024-12-30</td>
+<td class='num'>634</td>
+<td class='num'>13</td>
+<td class='num'>58s</td>
+<td class='num'>136.3MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/mm2/Little-CMS">little-cms</a></td>
+<td>Image</td>
+<td class='num'>15</td>
+<td class='compact'><code>cm1▲</code></td>
+<td class='num'>0</td>
+<td>—</td>
+<td class='num'>87K</td>
+<td class='compact'><a href="https://github.com/mm2/Little-CMS/commit/5176347"><code>5176347</code></a></td>
+<td class='compact'>2025-02-04</td>
+<td class='num'>8072</td>
+<td class='num'>140</td>
+<td class='num'>33s</td>
+<td class='num'>93.0MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/mm2/Little-CMS">little-cms</a></td>
+<td>Image</td>
+<td class='num'>15</td>
+<td class='compact'><code>cm1□</code></td>
+<td class='num'>2</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/126.html" title="Buffer Over-read">CWE-126</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/476.html" title="NULL Pointer Dereference">CWE-476</a></td>
+<td class='num'>87K</td>
+<td class='compact'><a href="https://github.com/mm2/Little-CMS/commit/762d7a6"><code>762d7a6</code></a></td>
+<td class='compact'>2025-05-04</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>32s</td>
+<td class='num'>93.0MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/cesanta/mongoose">mongoose</a></td>
+<td>Network</td>
+<td class='num'>1</td>
+<td class='compact'><code>mg1▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a></td>
+<td class='num'>352K</td>
+<td class='compact'><a href="https://github.com/cesanta/mongoose/commit/ef8e7419"><code>ef8e741</code></a></td>
+<td class='compact'>2025-02-02</td>
+<td class='num'>470</td>
+<td class='num'>14</td>
+<td class='num'>17s</td>
+<td class='num'>5.5MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/cesanta/mongoose">mongoose</a></td>
+<td>Network</td>
+<td class='num'>1</td>
+<td class='compact'><code>mg2▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/125.html" title="Out-of-bounds Read">CWE-125</a></td>
+<td class='num'>352K</td>
+<td class='compact'><a href="https://github.com/cesanta/mongoose/commit/ef8e7419"><code>ef8e741</code></a></td>
+<td class='compact'>2025-02-02</td>
+<td class='num'>416</td>
+<td class='num'>13</td>
+<td class='num'>17s</td>
+<td class='num'>5.5MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/cesanta/mongoose">mongoose</a></td>
+<td>Network</td>
+<td class='num'>1</td>
+<td class='compact'><code>mg3▲</code></td>
+<td class='num'>0</td>
+<td>—</td>
+<td class='num'>403K</td>
+<td class='compact'><a href="https://github.com/cesanta/mongoose/commit/2df53c3d"><code>2df53c3</code></a></td>
+<td class='compact'>2024-11-20</td>
+<td class='num'>1019782</td>
+<td class='num'>1234</td>
+<td class='num'>16s</td>
+<td class='num'>5.5MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/cesanta/mongoose">mongoose</a></td>
+<td>Network</td>
+<td class='num'>1</td>
+<td class='compact'><code>mg1□</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/193.html" title="Off-by-one Error">CWE-193</a></td>
+<td class='num'>352K</td>
+<td class='compact'><a href="https://github.com/cesanta/mongoose/commit/ef8e7419"><code>ef8e741</code></a></td>
+<td class='compact'>2025-02-02</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>17s</td>
+<td class='num'>5.5MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/ntop/nDPI">ndpi</a></td>
+<td>Network</td>
+<td class='num'>55</td>
+<td class='compact'><code>ndpi1□</code></td>
+<td class='num'>0</td>
+<td>—</td>
+<td class='num'>136K</td>
+<td class='compact'><a href="https://github.com/ntop/nDPI/commit/8987a2c18"><code>8987a2c</code></a></td>
+<td class='compact'>2025-06-24</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>105s</td>
+<td class='num'>1009.0MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/openssl/openssl">openssl</a></td>
+<td>Crypto</td>
+<td class='num'>30</td>
+<td class='compact'><code>openssl_analysis_raw</code></td>
+<td class='num'>0</td>
+<td>—</td>
+<td class='num'>909K</td>
+<td class='compact'><a href="https://github.com/openssl/openssl/commit/5b800192f2"><code>5b80019</code></a></td>
+<td class='compact'>2025-05-01</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>182s</td>
+<td class='num'>747.9MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/shadowsocks/shadowsocks-libev">shadowsocks</a></td>
+<td>Network</td>
+<td class='num'>1</td>
+<td class='compact'><code>shadowsocks1□</code></td>
+<td class='num'>5</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/126.html" title="Buffer Over-read">CWE-126</a></td>
+<td class='num'>19K</td>
+<td class='compact'><a href="https://github.com/shadowsocks/shadowsocks-libev/commit/9afa3ca"><code>9afa3ca</code></a></td>
+<td class='compact'>2025-01-20</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>86s</td>
+<td class='num'>6.2MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/systemd/systemd">systemd</a></td>
+<td>System</td>
+<td class='num'>47</td>
+<td class='compact'><code>systemd1□</code></td>
+<td class='num'>4</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/122.html" title="Heap-based Buffer Overflow">CWE-122</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/415.html" title="Double Free">CWE-415</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/787.html" title="Out-of-bounds Write">CWE-787</a></td>
+<td class='num'>740K</td>
+<td class='compact'><a href="https://github.com/systemd/systemd/commit/d218ecc733"><code>d218ecc</code></a></td>
+<td class='compact'>2024-12-13</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>71s</td>
+<td class='num'>253.9MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/wireshark/wireshark">wireshark</a></td>
+<td>Network</td>
+<td class='num'>47</td>
+<td class='compact'><code>ws1▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/787.html" title="Out-of-bounds Write">CWE-787</a></td>
+<td class='num'>4901K</td>
+<td class='compact'><a href="https://github.com/wireshark/wireshark/commit/624c0b1f5c"><code>624c0b1</code></a></td>
+<td class='compact'>2025-03-04</td>
+<td class='num'>354</td>
+<td class='num'>9</td>
+<td class='num'>462s</td>
+<td class='num'>20.9GB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/wireshark/wireshark">wireshark</a></td>
+<td>Network</td>
+<td class='num'>47</td>
+<td class='compact'><code>ws2▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a></td>
+<td class='num'>4901K</td>
+<td class='compact'><a href="https://github.com/wireshark/wireshark/commit/624c0b1f5c"><code>624c0b1</code></a></td>
+<td class='compact'>2025-03-04</td>
+<td class='num'>560</td>
+<td class='num'>10</td>
+<td class='num'>442s</td>
+<td class='num'>20.9GB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/wireshark/wireshark">wireshark</a></td>
+<td>Network</td>
+<td class='num'>47</td>
+<td class='compact'><code>ws3▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/122.html" title="Heap-based Buffer Overflow">CWE-122</a></td>
+<td class='num'>4902K</td>
+<td class='compact'><a href="https://github.com/wireshark/wireshark/commit/624c0b1f5c"><code>624c0b1</code></a></td>
+<td class='compact'>2025-03-04</td>
+<td class='num'>407</td>
+<td class='num'>9</td>
+<td class='num'>473s</td>
+<td class='num'>20.9GB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/wireshark/wireshark">wireshark</a></td>
+<td>Network</td>
+<td class='num'>47</td>
+<td class='compact'><code>ws4▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/126.html" title="Buffer Over-read">CWE-126</a></td>
+<td class='num'>4901K</td>
+<td class='compact'><a href="https://github.com/wireshark/wireshark/commit/624c0b1f5c"><code>624c0b1</code></a></td>
+<td class='compact'>2025-03-04</td>
+<td class='num'>714</td>
+<td class='num'>9</td>
+<td class='num'>464s</td>
+<td class='num'>20.9GB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/wireshark/wireshark">wireshark</a></td>
+<td>Network</td>
+<td class='num'>47</td>
+<td class='compact'><code>ws5▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/129.html" title="Improper Validation of Array Index">CWE-129</a></td>
+<td class='num'>4901K</td>
+<td class='compact'><a href="https://github.com/wireshark/wireshark/commit/624c0b1f5c"><code>624c0b1</code></a></td>
+<td class='compact'>2025-03-04</td>
+<td class='num'>617</td>
+<td class='num'>8</td>
+<td class='num'>459s</td>
+<td class='num'>20.9GB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/wireshark/wireshark">wireshark</a></td>
+<td>Network</td>
+<td class='num'>47</td>
+<td class='compact'><code>ws7▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/120.html" title="Buffer Copy without Checking Size of Input (&#x27;Classic Buffer Overflow&#x27;)">CWE-120</a></td>
+<td class='num'>4901K</td>
+<td class='compact'><a href="https://github.com/wireshark/wireshark/commit/624c0b1f5c"><code>624c0b1</code></a></td>
+<td class='compact'>2025-03-04</td>
+<td class='num'>420</td>
+<td class='num'>9</td>
+<td class='num'>457s</td>
+<td class='num'>20.9GB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/wireshark/wireshark">wireshark</a></td>
+<td>Network</td>
+<td class='num'>47</td>
+<td class='compact'><code>ws1□</code></td>
+<td class='num'>6</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/122.html" title="Heap-based Buffer Overflow">CWE-122</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/134.html" title="Use of Externally-Controlled Format String">CWE-134</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/416.html" title="Use After Free">CWE-416</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/457.html" title="Use of Uninitialized Variable">CWE-457</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/680.html" title="Integer Overflow to Buffer Overflow">CWE-680</a></td>
+<td class='num'>4901K</td>
+<td class='compact'><a href="https://github.com/wireshark/wireshark/commit/624c0b1f5c"><code>624c0b1</code></a></td>
+<td class='compact'>2025-03-04</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>492s</td>
+<td class='num'>20.9GB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td><a href="https://github.com/tukaani-project/xz">xz</a></td>
+<td>Compression</td>
+<td class='num'>4</td>
+<td class='compact'><code>xz1□</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/416.html" title="Use After Free">CWE-416</a></td>
+<td class='num'>41K</td>
+<td class='compact'><a href="https://github.com/tukaani-project/xz/commit/dd4a1b25"><code>dd4a1b2</code></a></td>
+<td class='compact'>2025-05-23</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>37s</td>
+<td class='num'>20.0MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/apache/commons-compress">commons-compress</a></td>
+<td>Compression</td>
+<td class='num'>16</td>
+<td class='compact'><code>cc1▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/400.html" title="Uncontrolled Resource Consumption">CWE-400</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/770.html" title="Allocation of Resources Without Limits or Throttling">CWE-770</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/1333.html" title="Inefficient Regular Expression Complexity">CWE-1333</a></td>
+<td class='num'>75K</td>
+<td class='compact'><a href="https://github.com/apache/commons-compress/commit/0df4a4145"><code>0df4a41</code></a></td>
+<td class='compact'>2025-02-10</td>
+<td class='num'>205</td>
+<td class='num'>9</td>
+<td class='num'>113s</td>
+<td class='num'>17.6MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/apache/commons-compress">commons-compress</a></td>
+<td>Compression</td>
+<td class='num'>16</td>
+<td class='compact'><code>cc4▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/22.html" title="Improper Limitation of a Pathname to a Restricted Directory (&#x27;Path Traversal&#x27;)">CWE-22</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/29.html" title="Path Traversal: &#x27;..filename&#x27;">CWE-29</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/35.html" title="Path Traversal: &#x27;.../...//&#x27;">CWE-35</a></td>
+<td class='num'>76K</td>
+<td class='compact'><a href="https://github.com/apache/commons-compress/commit/3a645c7e1"><code>3a645c7</code></a></td>
+<td class='compact'>2025-06-08</td>
+<td class='num'>166</td>
+<td class='num'>10</td>
+<td class='num'>110s</td>
+<td class='num'>17.7MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/apache/commons-compress">commons-compress</a></td>
+<td>Compression</td>
+<td class='num'>16</td>
+<td class='compact'><code>cc5▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/28.html" title="Path Traversal: &#x27;..filedir&#x27;">CWE-28</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/77.html" title="Improper Neutralization of Special Elements used in a Command (&#x27;Command Injection&#x27;)">CWE-77</a></td>
+<td class='num'>76K</td>
+<td class='compact'><a href="https://github.com/apache/commons-compress/commit/3e70c5064"><code>3e70c50</code></a></td>
+<td class='compact'>2025-06-13</td>
+<td class='num'>163</td>
+<td class='num'>8</td>
+<td class='num'>110s</td>
+<td class='num'>17.7MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/apache/commons-compress">commons-compress</a></td>
+<td>Compression</td>
+<td class='num'>16</td>
+<td class='compact'><code>cc6▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/22.html" title="Improper Limitation of a Pathname to a Restricted Directory (&#x27;Path Traversal&#x27;)">CWE-22</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/29.html" title="Path Traversal: &#x27;..filename&#x27;">CWE-29</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/35.html" title="Path Traversal: &#x27;.../...//&#x27;">CWE-35</a></td>
+<td class='num'>76K</td>
+<td class='compact'><a href="https://github.com/apache/commons-compress/commit/3a645c7e1"><code>3a645c7</code></a></td>
+<td class='compact'>2025-06-08</td>
+<td class='num'>170</td>
+<td class='num'>10</td>
+<td class='num'>108s</td>
+<td class='num'>17.7MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/apache/commons-compress">commons-compress</a></td>
+<td>Compression</td>
+<td class='num'>16</td>
+<td class='compact'><code>cc7▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/22.html" title="Improper Limitation of a Pathname to a Restricted Directory (&#x27;Path Traversal&#x27;)">CWE-22</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/29.html" title="Path Traversal: &#x27;..filename&#x27;">CWE-29</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/35.html" title="Path Traversal: &#x27;.../...//&#x27;">CWE-35</a></td>
+<td class='num'>76K</td>
+<td class='compact'><a href="https://github.com/apache/commons-compress/commit/3a645c7e1"><code>3a645c7</code></a></td>
+<td class='compact'>2025-06-08</td>
+<td class='num'>244</td>
+<td class='num'>10</td>
+<td class='num'>106s</td>
+<td class='num'>17.7MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/dcm4che/dcm4che">dcm4che</a></td>
+<td>Healthcare</td>
+<td class='num'>1</td>
+<td class='compact'><code>dcm4che-full-01</code></td>
+<td class='num'>0</td>
+<td>—</td>
+<td class='num'>105K</td>
+<td class='compact'><a href="https://github.com/dcm4che/dcm4che/commit/d5b4cd326"><code>d5b4cd3</code></a></td>
+<td class='compact'>2025-06-11</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>315s</td>
+<td class='num'>7.7MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/dicoogle/dicoogle">dicoogle</a></td>
+<td>Healthcare</td>
+<td class='num'>1</td>
+<td class='compact'><code>dicoogle1□</code></td>
+<td class='num'>0</td>
+<td>—</td>
+<td class='num'>21K</td>
+<td class='compact'><a href="https://github.com/dicoogle/dicoogle/commit/347692ad"><code>347692a</code></a></td>
+<td class='compact'>2025-03-10</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>101s</td>
+<td class='num'>25.6MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/GoogleCloudPlatform/healthcare-data-harmonization">healthcare-data-harmonization</a></td>
+<td>Healthcare</td>
+<td class='num'>1</td>
+<td class='compact'><code>hcdh1□</code></td>
+<td class='num'>0</td>
+<td>—</td>
+<td class='num'>53K</td>
+<td class='compact'><a href="https://github.com/GoogleCloudPlatform/healthcare-data-harmonization/commit/a628c4a"><code>a628c4a</code></a></td>
+<td class='compact'>2025-06-02</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>80s</td>
+<td class='num'>11.2MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/apache/hertzbeat">hertzbeat</a></td>
+<td>Monitoring</td>
+<td class='num'>1</td>
+<td class='compact'><code>hertzbeat1□</code></td>
+<td class='num'>0</td>
+<td>—</td>
+<td class='num'>78K</td>
+<td class='compact'><a href="https://github.com/apache/hertzbeat/commit/d077c7221"><code>d077c72</code></a></td>
+<td class='compact'>2025-06-13</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>170s</td>
+<td class='num'>349.7MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/jhy/jsoup">jsoup</a></td>
+<td>Document</td>
+<td class='num'>2</td>
+<td class='compact'><code>jsoup1□</code></td>
+<td class='num'>0</td>
+<td>—</td>
+<td class='num'>36K</td>
+<td class='compact'><a href="https://github.com/jhy/jsoup/commit/3b97e961"><code>3b97e96</code></a></td>
+<td class='compact'>2025-06-30</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>79s</td>
+<td class='num'>8.2MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/apache/logging-log4j2">log4j2</a></td>
+<td>Logging</td>
+<td class='num'>1</td>
+<td class='compact'><code>log4j2-delta-01</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/20.html" title="Improper Input Validation">CWE-20</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/917.html" title="Improper Neutralization of Special Elements used in an Expression Language Statement (&#x27;Expression Language Injection&#x27;)">CWE-917</a></td>
+<td class='num'>54K</td>
+<td class='compact'><a href="https://github.com/apache/logging-log4j2/commit/f1a0cac60"><code>f1a0cac</code></a></td>
+<td class='compact'>2013-07-18</td>
+<td class='num'>535</td>
+<td class='num'>17</td>
+<td class='num'>96s</td>
+<td class='num'>8.4MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/apache/pdfbox">pdfbox</a></td>
+<td>Document</td>
+<td class='num'>6</td>
+<td class='compact'><code>pdfbox1▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/28.html" title="Path Traversal: &#x27;..filedir&#x27;">CWE-28</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/77.html" title="Improper Neutralization of Special Elements used in a Command (&#x27;Command Injection&#x27;)">CWE-77</a></td>
+<td class='num'>167K</td>
+<td class='compact'><a href="https://github.com/apache/pdfbox/commit/afd3ea77c"><code>afd3ea7</code></a></td>
+<td class='compact'>2025-06-11</td>
+<td class='num'>455</td>
+<td class='num'>12</td>
+<td class='num'>135s</td>
+<td class='num'>7.7MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/apache/pdfbox">pdfbox</a></td>
+<td>Document</td>
+<td class='num'>6</td>
+<td class='compact'><code>pdfbox1□</code></td>
+<td class='num'>8</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/611.html" title="Improper Restriction of XML External Entity Reference">CWE-611</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/789.html" title="Memory Allocation with Excessive Size Value">CWE-789</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/834.html" title="Excessive Iteration">CWE-834</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/835.html" title="Loop with Unreachable Exit Condition (&#x27;Infinite Loop&#x27;)">CWE-835</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/918.html" title="Server-Side Request Forgery (SSRF)">CWE-918</a></td>
+<td class='num'>167K</td>
+<td class='compact'><a href="https://github.com/apache/pdfbox/commit/afd3ea77c"><code>afd3ea7</code></a></td>
+<td class='compact'>2025-06-11</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>129s</td>
+<td class='num'>7.7MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/apache/poi">poi</a></td>
+<td>Document</td>
+<td class='num'>17</td>
+<td class='compact'><code>poi1▲</code></td>
+<td class='num'>2</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/20.html" title="Improper Input Validation">CWE-20</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/918.html" title="Server-Side Request Forgery (SSRF)">CWE-918</a></td>
+<td class='num'>433K</td>
+<td class='compact'><a href="https://github.com/apache/poi/commit/c78426643"><code>c784266</code></a></td>
+<td class='compact'>2025-06-17</td>
+<td class='num'>318</td>
+<td class='num'>17</td>
+<td class='num'>216s</td>
+<td class='num'>14.4MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/apache/poi">poi</a></td>
+<td>Document</td>
+<td class='num'>17</td>
+<td class='compact'><code>poi1□</code></td>
+<td class='num'>5</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/20.html" title="Improper Input Validation">CWE-20</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/35.html" title="Path Traversal: &#x27;.../...//&#x27;">CWE-35</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/382.html" title="J2EE Bad Practices: Use of System.exit()">CWE-382</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/695.html" title="Use of Low-Level Functionality">CWE-695</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/770.html" title="Allocation of Resources Without Limits or Throttling">CWE-770</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/789.html" title="Memory Allocation with Excessive Size Value">CWE-789</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/834.html" title="Excessive Iteration">CWE-834</a></td>
+<td class='num'>433K</td>
+<td class='compact'><a href="https://github.com/apache/poi/commit/c78426643"><code>c784266</code></a></td>
+<td class='compact'>2025-06-17</td>
+<td class='num'>—</td>
+<td class='num'>—</td>
+<td class='num'>206s</td>
+<td class='num'>14.4MB</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td><a href="https://github.com/apache/tika">tika</a></td>
+<td>Document</td>
+<td class='num'>9</td>
+<td class='compact'><code>tk6▲</code></td>
+<td class='num'>1</td>
+<td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/407.html" title="Inefficient Algorithmic Complexity">CWE-407</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/834.html" title="Excessive Iteration">CWE-834</a></td>
+<td class='num'>188K</td>
+<td class='compact'><a href="https://github.com/apache/tika/commit/2d199aa0d"><code>2d199aa</code></a></td>
+<td class='compact'>2025-06-03</td>
+<td class='num'>482</td>
+<td class='num'>11</td>
+<td class='num'>150s</td>
+<td class='num'>61.3MB</td>
+</tr>
+</tbody></table></div>
+<p class="footnotes"><span class="mode-mark delta">▲</span> delta-mode &nbsp; <span class="mode-mark full">□</span> full-mode. Cutoff: date of the latest upstream commit incorporated into the organizer's CP repository. Build time measured on AMD EPYC 7452 (128 cores), 512 GB RAM, Ubuntu 22.04.</p>
+</section>
+
+
+<section id="cpv-details">
+<h2><span class="appendix-tag">Appendix G</span>Challenge Project Vulnerability (CPV) Details<a class="anchor-link" href="#cpv-details">¶</a></h2>
+
+<p>
+Detailed information about each Challenge Project Vulnerability (CPV) in the AIxCC final round.
+</p>
+
+<div class="table-wrap"><table class="data">
+<thead><tr>
+<th>Lang</th><th>Ph</th><th>Project</th><th>ID</th><th>Vuln</th>
+<th>CWE</th><th>CWE Name</th>
+</tr></thead><tbody>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-libavif'>libavif</a></td>
+<td class='compact'><span class="cpv-name">av2<span class="mode-mark delta">▲</span>02</span></td>
+<td class='compact'><code>avif-002</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/126.html" title="Buffer Over-read">CWE-126</a></td>
+<td>Buffer Over-read</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-little-cms'>little-cms</a></td>
+<td class='compact'><span class="cpv-name">cm1<span class="mode-mark full">□</span>01</span></td>
+<td class='compact'><code>lcms-001</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/476.html" title="NULL Pointer Dereference">CWE-476</a></td>
+<td>NULL Pointer Dereference</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-little-cms'>little-cms</a></td>
+<td class='compact'><span class="cpv-name">cm1<span class="mode-mark full">□</span>02</span></td>
+<td class='compact'><code>lcms-002</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/126.html" title="Buffer Over-read">CWE-126</a></td>
+<td>Buffer Over-read</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-curl'>curl</a></td>
+<td class='compact'><span class="cpv-name">cu2<span class="mode-mark delta">▲</span>06</span></td>
+<td class='compact'><code>curl-006</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/476.html" title="NULL Pointer Dereference">CWE-476</a></td>
+<td>NULL Pointer Dereference</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-curl'>curl</a></td>
+<td class='compact'><span class="cpv-name">cu3<span class="mode-mark delta">▲</span>07</span></td>
+<td class='compact'><code>curl-007</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/476.html" title="NULL Pointer Dereference">CWE-476</a></td>
+<td>NULL Pointer Dereference</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-curl'>curl</a></td>
+<td class='compact'><span class="cpv-name">cu4<span class="mode-mark delta">▲</span>03</span></td>
+<td class='compact'><code>curl-003</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a></td>
+<td>Stack-based Buffer Overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-curl'>curl</a></td>
+<td class='compact'><span class="cpv-name">cu4<span class="mode-mark delta">▲</span>08</span></td>
+<td class='compact'><code>curl-008</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/476.html" title="NULL Pointer Dereference">CWE-476</a></td>
+<td>NULL Pointer Dereference</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-curl'>curl</a></td>
+<td class='compact'><span class="cpv-name">cu5<span class="mode-mark delta">▲</span>01</span></td>
+<td class='compact'><code>curl-001</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/134.html" title="Use of Externally-Controlled Format String">CWE-134</a></td>
+<td>Use of Externally-Controlled Format String</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-curl'>curl</a></td>
+<td class='compact'><span class="cpv-name">cu5<span class="mode-mark delta">▲</span>02</span></td>
+<td class='compact'><code>curl-002</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/787.html" title="Out-of-bounds Write">CWE-787</a></td>
+<td>Out-of-bounds Write</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-libexif'>libexif</a></td>
+<td class='compact'><span class="cpv-name">ex2<span class="mode-mark delta">▲</span>01</span></td>
+<td class='compact'><code>exif-001</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/122.html" title="Heap-based Buffer Overflow">CWE-122</a></td>
+<td>Heap-based Buffer Overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-libexif'>libexif</a></td>
+<td class='compact'><span class="cpv-name">ex3<span class="mode-mark delta">▲</span>02</span></td>
+<td class='compact'><code>exif-002</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a></td>
+<td>Stack-based Buffer Overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-freerdp'>freerdp</a></td>
+<td class='compact'><span class="cpv-name">fp2<span class="mode-mark delta">▲</span>02</span></td>
+<td class='compact'><code>vuln_002</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/122.html" title="Heap-based Buffer Overflow">CWE-122</a></td>
+<td>Heap-based Buffer Overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-libxml2'>libxml2</a></td>
+<td class='compact'><span class="cpv-name">lx3<span class="mode-mark delta">▲</span>04</span></td>
+<td class='compact'><code>vuln_004</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/122.html" title="Heap-based Buffer Overflow">CWE-122</a></td>
+<td>Heap-based Buffer Overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-mongoose'>mongoose</a></td>
+<td class='compact'><span class="cpv-name">mg1<span class="mode-mark delta">▲</span>01</span></td>
+<td class='compact'><code>mongoose_1</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a></td>
+<td>Stack-based Buffer Overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-mongoose'>mongoose</a></td>
+<td class='compact'><span class="cpv-name">mg2<span class="mode-mark delta">▲</span>02</span></td>
+<td class='compact'><code>mongoose_2</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/125.html" title="Out-of-bounds Read">CWE-125</a></td>
+<td>Out-of-bounds Read</td>
+</tr>
+<tr>
+<td rowspan="2"><span class="lang-tag">C</span></td>
+<td rowspan="2" class='center'>P2</td>
+<td rowspan="2"><a href='https://github.com/aixcc-afc/round-final-phase2-mongoose'>mongoose</a></td>
+<td rowspan="2" class='compact'><span class="cpv-name">mg1<span class="mode-mark full">□</span>00</span></td>
+<td rowspan="2" class='compact'><code>mongoose_0</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a></td>
+<td>Stack-based Buffer Overflow</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/193.html" title="Off-by-one Error">CWE-193</a></td>
+<td>Off-by-one Error</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-shadowsocks-libev'>shadowsocks-libev</a></td>
+<td class='compact'><span class="cpv-name">ss1<span class="mode-mark full">□</span>00</span></td>
+<td class='compact'><code>shadowsocks-libev_0</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/126.html" title="Buffer Over-read">CWE-126</a></td>
+<td>Buffer Over-read</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-shadowsocks-libev'>shadowsocks-libev</a></td>
+<td class='compact'><span class="cpv-name">ss1<span class="mode-mark full">□</span>01</span></td>
+<td class='compact'><code>shadowsocks-libev_1</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/126.html" title="Buffer Over-read">CWE-126</a></td>
+<td>Buffer Over-read</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-shadowsocks-libev'>shadowsocks-libev</a></td>
+<td class='compact'><span class="cpv-name">ss1<span class="mode-mark full">□</span>02</span></td>
+<td class='compact'><code>shadowsocks-libev_2</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/126.html" title="Buffer Over-read">CWE-126</a></td>
+<td>Buffer Over-read</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-shadowsocks-libev'>shadowsocks-libev</a></td>
+<td class='compact'><span class="cpv-name">ss1<span class="mode-mark full">□</span>03</span></td>
+<td class='compact'><code>shadowsocks-libev_3</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/126.html" title="Buffer Over-read">CWE-126</a></td>
+<td>Buffer Over-read</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-shadowsocks-libev'>shadowsocks-libev</a></td>
+<td class='compact'><span class="cpv-name">ss1<span class="mode-mark full">□</span>04</span></td>
+<td class='compact'><code>shadowsocks-libev_4</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/126.html" title="Buffer Over-read">CWE-126</a></td>
+<td>Buffer Over-read</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-systemd'>systemd</a></td>
+<td class='compact'><span class="cpv-name">sd1<span class="mode-mark full">□</span>01</span></td>
+<td class='compact'><code>systemd-001</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/787.html" title="Out-of-bounds Write">CWE-787</a></td>
+<td>Out-of-bounds Write</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-systemd'>systemd</a></td>
+<td class='compact'><span class="cpv-name">sd1<span class="mode-mark full">□</span>03</span></td>
+<td class='compact'><code>systemd-003</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/122.html" title="Heap-based Buffer Overflow">CWE-122</a></td>
+<td>Heap-based Buffer Overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-systemd'>systemd</a></td>
+<td class='compact'><span class="cpv-name">sd1<span class="mode-mark full">□</span>04</span></td>
+<td class='compact'><code>systemd-004</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/415.html" title="Double Free">CWE-415</a></td>
+<td>Double Free</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-systemd'>systemd</a></td>
+<td class='compact'><span class="cpv-name">sd1<span class="mode-mark full">□</span>05</span></td>
+<td class='compact'><code>systemd-005</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/415.html" title="Double Free">CWE-415</a></td>
+<td>Double Free</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P3</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase3-dav1d'>dav1d</a></td>
+<td class='compact'><span class="cpv-name">da1<span class="mode-mark full">□</span>01</span></td>
+<td class='compact'><code>dav1d-001</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/190.html" title="Integer Overflow or Wraparound">CWE-190</a></td>
+<td>Integer Overflow or Wraparound</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P3</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase3-wireshark'>wireshark</a></td>
+<td class='compact'><span class="cpv-name">ws1<span class="mode-mark full">□</span>01</span></td>
+<td class='compact'><code>vuln_001</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a></td>
+<td>Stack-based Buffer Overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P3</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase3-wireshark'>wireshark</a></td>
+<td class='compact'><span class="cpv-name">ws1<span class="mode-mark full">□</span>02</span></td>
+<td class='compact'><code>vuln_002</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/416.html" title="Use After Free">CWE-416</a></td>
+<td>Use After Free</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P3</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase3-wireshark'>wireshark</a></td>
+<td class='compact'><span class="cpv-name">ws1<span class="mode-mark full">□</span>05</span></td>
+<td class='compact'><code>vuln_005</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/134.html" title="Use of Externally-Controlled Format String">CWE-134</a></td>
+<td>Use of Externally-Controlled Format String</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P3</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase3-wireshark'>wireshark</a></td>
+<td class='compact'><span class="cpv-name">ws1<span class="mode-mark full">□</span>10</span></td>
+<td class='compact'><code>vuln_010</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/122.html" title="Heap-based Buffer Overflow">CWE-122</a></td>
+<td>Heap-based Buffer Overflow</td>
+</tr>
+<tr>
+<td rowspan="3"><span class="lang-tag">C</span></td>
+<td rowspan="3" class='center'>P3</td>
+<td rowspan="3"><a href='https://github.com/aixcc-afc/round-final-phase3-wireshark'>wireshark</a></td>
+<td rowspan="3" class='compact'><span class="cpv-name">ws1<span class="mode-mark full">□</span>11</span></td>
+<td rowspan="3" class='compact'><code>vuln_011</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a></td>
+<td>Stack-based Buffer Overflow</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/122.html" title="Heap-based Buffer Overflow">CWE-122</a></td>
+<td>Heap-based Buffer Overflow</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/680.html" title="Integer Overflow to Buffer Overflow">CWE-680</a></td>
+<td>Integer Overflow to Buffer Overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P3</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase3-wireshark'>wireshark</a></td>
+<td class='compact'><span class="cpv-name">ws1<span class="mode-mark full">□</span>12</span></td>
+<td class='compact'><code>vuln_012</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/457.html" title="Use of Uninitialized Variable">CWE-457</a></td>
+<td>Use of Uninitialized Variable</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P4</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase4-freerdp'>freerdp</a></td>
+<td class='compact'><span class="cpv-name">fp3<span class="mode-mark delta">▲</span>03</span></td>
+<td class='compact'><code>vuln_003</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/123.html" title="Write-what-where Condition">CWE-123</a></td>
+<td>Write-what-where Condition</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P7</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase7-wireshark'>wireshark</a></td>
+<td class='compact'><span class="cpv-name">ws1<span class="mode-mark delta">▲</span>03</span></td>
+<td class='compact'><code>vuln_003</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/787.html" title="Out-of-bounds Write">CWE-787</a></td>
+<td>Out-of-bounds Write</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P7</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase7-wireshark'>wireshark</a></td>
+<td class='compact'><span class="cpv-name">ws2<span class="mode-mark delta">▲</span>04</span></td>
+<td class='compact'><code>vuln_004</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a></td>
+<td>Stack-based Buffer Overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P7</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase7-wireshark'>wireshark</a></td>
+<td class='compact'><span class="cpv-name">ws3<span class="mode-mark delta">▲</span>06</span></td>
+<td class='compact'><code>vuln_006</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/122.html" title="Heap-based Buffer Overflow">CWE-122</a></td>
+<td>Heap-based Buffer Overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P7</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase7-wireshark'>wireshark</a></td>
+<td class='compact'><span class="cpv-name">ws4<span class="mode-mark delta">▲</span>07</span></td>
+<td class='compact'><code>vuln_007</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/126.html" title="Buffer Over-read">CWE-126</a></td>
+<td>Buffer Over-read</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P7</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase7-wireshark'>wireshark</a></td>
+<td class='compact'><span class="cpv-name">ws5<span class="mode-mark delta">▲</span>08</span></td>
+<td class='compact'><code>vuln_008</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/129.html" title="Improper Validation of Array Index">CWE-129</a></td>
+<td>Improper Validation of Array Index</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P7</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase7-wireshark'>wireshark</a></td>
+<td class='compact'><span class="cpv-name">ws7<span class="mode-mark delta">▲</span>13</span></td>
+<td class='compact'><code>vuln_013</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/120.html" title="Buffer Copy without Checking Size of Input (&#x27;Classic Buffer Overflow&#x27;)">CWE-120</a></td>
+<td>Buffer Copy without Checking Size of Input (&#x27;Classic Buffer Overflow&#x27;)</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P7</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase7-xz'>xz</a></td>
+<td class='compact'><span class="cpv-name">xz1<span class="mode-mark full">□</span>01</span></td>
+<td class='compact'><code>xz-001</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/416.html" title="Use After Free">CWE-416</a></td>
+<td>Use After Free</td>
+</tr>
+<tr>
+<td rowspan="3"><span class="lang-tag">Java</span></td>
+<td rowspan="3" class='center'>P1</td>
+<td rowspan="3"><a href='https://github.com/aixcc-afc/round-final-phase1-commons-compress'>commons-compress</a></td>
+<td rowspan="3" class='compact'><span class="cpv-name">cc1<span class="mode-mark delta">▲</span>03</span></td>
+<td rowspan="3" class='compact'><code>vuln_3</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/400.html" title="Uncontrolled Resource Consumption">CWE-400</a></td>
+<td>Uncontrolled Resource Consumption</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/770.html" title="Allocation of Resources Without Limits or Throttling">CWE-770</a></td>
+<td>Allocation of Resources Without Limits or Throttling</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/1333.html" title="Inefficient Regular Expression Complexity">CWE-1333</a></td>
+<td>Inefficient Regular Expression Complexity</td>
+</tr>
+<tr>
+<td rowspan="3"><span class="lang-tag">Java</span></td>
+<td rowspan="3" class='center'>P1</td>
+<td rowspan="3"><a href='https://github.com/aixcc-afc/round-final-phase1-commons-compress'>commons-compress</a></td>
+<td rowspan="3" class='compact'><span class="cpv-name">cc4<span class="mode-mark delta">▲</span>06</span></td>
+<td rowspan="3" class='compact'><code>vuln_6</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/35.html" title="Path Traversal: &#x27;.../...//&#x27;">CWE-35</a></td>
+<td>Path Traversal: &#x27;.../...//&#x27;</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/22.html" title="Improper Limitation of a Pathname to a Restricted Directory (&#x27;Path Traversal&#x27;)">CWE-22</a></td>
+<td>Improper Limitation of a Pathname to a Restricted Directory (&#x27;Path Traversal&#x27;)</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/29.html" title="Path Traversal: &#x27;..filename&#x27;">CWE-29</a></td>
+<td>Path Traversal: &#x27;..filename&#x27;</td>
+</tr>
+<tr>
+<td rowspan="2"><span class="lang-tag">Java</span></td>
+<td rowspan="2" class='center'>P1</td>
+<td rowspan="2"><a href='https://github.com/aixcc-afc/round-final-phase1-commons-compress'>commons-compress</a></td>
+<td rowspan="2" class='compact'><span class="cpv-name">cc5<span class="mode-mark delta">▲</span>10</span></td>
+<td rowspan="2" class='compact'><code>vuln_10</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/77.html" title="Improper Neutralization of Special Elements used in a Command (&#x27;Command Injection&#x27;)">CWE-77</a></td>
+<td>Improper Neutralization of Special Elements used in a Command (&#x27;Command Injection&#x27;)</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/28.html" title="Path Traversal: &#x27;..filedir&#x27;">CWE-28</a></td>
+<td>Path Traversal: &#x27;..filedir&#x27;</td>
+</tr>
+<tr>
+<td rowspan="2"><span class="lang-tag">Java</span></td>
+<td rowspan="2" class='center'>P1</td>
+<td rowspan="2"><a href='https://github.com/aixcc-afc/round-final-phase1-tika'>tika</a></td>
+<td rowspan="2" class='compact'><span class="cpv-name">tk6<span class="mode-mark delta">▲</span>10</span></td>
+<td rowspan="2" class='compact'><code>vuln_10</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/834.html" title="Excessive Iteration">CWE-834</a></td>
+<td>Excessive Iteration</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/407.html" title="Inefficient Algorithmic Complexity">CWE-407</a></td>
+<td>Inefficient Algorithmic Complexity</td>
+</tr>
+<tr>
+<td rowspan="3"><span class="lang-tag">Java</span></td>
+<td rowspan="3" class='center'>P2</td>
+<td rowspan="3"><a href='https://github.com/aixcc-afc/round-final-phase2-commons-compress'>commons-compress</a></td>
+<td rowspan="3" class='compact'><span class="cpv-name">cc6<span class="mode-mark delta">▲</span>07</span></td>
+<td rowspan="3" class='compact'><code>vuln_7</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/35.html" title="Path Traversal: &#x27;.../...//&#x27;">CWE-35</a></td>
+<td>Path Traversal: &#x27;.../...//&#x27;</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/22.html" title="Improper Limitation of a Pathname to a Restricted Directory (&#x27;Path Traversal&#x27;)">CWE-22</a></td>
+<td>Improper Limitation of a Pathname to a Restricted Directory (&#x27;Path Traversal&#x27;)</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/29.html" title="Path Traversal: &#x27;..filename&#x27;">CWE-29</a></td>
+<td>Path Traversal: &#x27;..filename&#x27;</td>
+</tr>
+<tr>
+<td rowspan="3"><span class="lang-tag">Java</span></td>
+<td rowspan="3" class='center'>P2</td>
+<td rowspan="3"><a href='https://github.com/aixcc-afc/round-final-phase2-commons-compress'>commons-compress</a></td>
+<td rowspan="3" class='compact'><span class="cpv-name">cc7<span class="mode-mark delta">▲</span>08</span></td>
+<td rowspan="3" class='compact'><code>vuln_8</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/35.html" title="Path Traversal: &#x27;.../...//&#x27;">CWE-35</a></td>
+<td>Path Traversal: &#x27;.../...//&#x27;</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/22.html" title="Improper Limitation of a Pathname to a Restricted Directory (&#x27;Path Traversal&#x27;)">CWE-22</a></td>
+<td>Improper Limitation of a Pathname to a Restricted Directory (&#x27;Path Traversal&#x27;)</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/29.html" title="Path Traversal: &#x27;..filename&#x27;">CWE-29</a></td>
+<td>Path Traversal: &#x27;..filename&#x27;</td>
+</tr>
+<tr>
+<td rowspan="2"><span class="lang-tag">Java</span></td>
+<td rowspan="2" class='center'>P2</td>
+<td rowspan="2"><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td rowspan="2" class='compact'><span class="cpv-name">pb1<span class="mode-mark delta">▲</span>02</span></td>
+<td rowspan="2" class='compact'><code>vuln_2</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/77.html" title="Improper Neutralization of Special Elements used in a Command (&#x27;Command Injection&#x27;)">CWE-77</a></td>
+<td>Improper Neutralization of Special Elements used in a Command (&#x27;Command Injection&#x27;)</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/28.html" title="Path Traversal: &#x27;..filedir&#x27;">CWE-28</a></td>
+<td>Path Traversal: &#x27;..filedir&#x27;</td>
+</tr>
+<tr>
+<td rowspan="2"><span class="lang-tag">Java</span></td>
+<td rowspan="2" class='center'>P2</td>
+<td rowspan="2"><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td rowspan="2" class='compact'><span class="cpv-name">pb1<span class="mode-mark full">□</span>00</span></td>
+<td rowspan="2" class='compact'><code>vuln_0</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/611.html" title="Improper Restriction of XML External Entity Reference">CWE-611</a></td>
+<td>Improper Restriction of XML External Entity Reference</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/918.html" title="Server-Side Request Forgery (SSRF)">CWE-918</a></td>
+<td>Server-Side Request Forgery (SSRF)</td>
+</tr>
+<tr>
+<td rowspan="2"><span class="lang-tag">Java</span></td>
+<td rowspan="2" class='center'>P2</td>
+<td rowspan="2"><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td rowspan="2" class='compact'><span class="cpv-name">pb1<span class="mode-mark full">□</span>01</span></td>
+<td rowspan="2" class='compact'><code>vuln_1</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/611.html" title="Improper Restriction of XML External Entity Reference">CWE-611</a></td>
+<td>Improper Restriction of XML External Entity Reference</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/918.html" title="Server-Side Request Forgery (SSRF)">CWE-918</a></td>
+<td>Server-Side Request Forgery (SSRF)</td>
+</tr>
+<tr>
+<td rowspan="2"><span class="lang-tag">Java</span></td>
+<td rowspan="2" class='center'>P2</td>
+<td rowspan="2"><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td rowspan="2" class='compact'><span class="cpv-name">pb1<span class="mode-mark full">□</span>03</span></td>
+<td rowspan="2" class='compact'><code>vuln_3</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/835.html" title="Loop with Unreachable Exit Condition (&#x27;Infinite Loop&#x27;)">CWE-835</a></td>
+<td>Loop with Unreachable Exit Condition (&#x27;Infinite Loop&#x27;)</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/834.html" title="Excessive Iteration">CWE-834</a></td>
+<td>Excessive Iteration</td>
+</tr>
+<tr>
+<td rowspan="2"><span class="lang-tag">Java</span></td>
+<td rowspan="2" class='center'>P2</td>
+<td rowspan="2"><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td rowspan="2" class='compact'><span class="cpv-name">pb1<span class="mode-mark full">□</span>04</span></td>
+<td rowspan="2" class='compact'><code>vuln_4</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/835.html" title="Loop with Unreachable Exit Condition (&#x27;Infinite Loop&#x27;)">CWE-835</a></td>
+<td>Loop with Unreachable Exit Condition (&#x27;Infinite Loop&#x27;)</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/834.html" title="Excessive Iteration">CWE-834</a></td>
+<td>Excessive Iteration</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td class='compact'><span class="cpv-name">pb1<span class="mode-mark full">□</span>05</span></td>
+<td class='compact'><code>vuln_5</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/789.html" title="Memory Allocation with Excessive Size Value">CWE-789</a></td>
+<td>Memory Allocation with Excessive Size Value</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td class='compact'><span class="cpv-name">pb1<span class="mode-mark full">□</span>06</span></td>
+<td class='compact'><code>vuln_6</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/789.html" title="Memory Allocation with Excessive Size Value">CWE-789</a></td>
+<td>Memory Allocation with Excessive Size Value</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td class='compact'><span class="cpv-name">pb1<span class="mode-mark full">□</span>07</span></td>
+<td class='compact'><code>vuln_7</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/834.html" title="Excessive Iteration">CWE-834</a></td>
+<td>Excessive Iteration</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td class='compact'><span class="cpv-name">pb1<span class="mode-mark full">□</span>08</span></td>
+<td class='compact'><code>vuln_8</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/834.html" title="Excessive Iteration">CWE-834</a></td>
+<td>Excessive Iteration</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-poi'>poi</a></td>
+<td class='compact'><span class="cpv-name">po1<span class="mode-mark delta">▲</span>05</span></td>
+<td class='compact'><code>vuln_5</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/918.html" title="Server-Side Request Forgery (SSRF)">CWE-918</a></td>
+<td>Server-Side Request Forgery (SSRF)</td>
+</tr>
+<tr>
+<td rowspan="2"><span class="lang-tag">Java</span></td>
+<td rowspan="2" class='center'>P2</td>
+<td rowspan="2"><a href='https://github.com/aixcc-afc/round-final-phase2-poi'>poi</a></td>
+<td rowspan="2" class='compact'><span class="cpv-name">po1<span class="mode-mark delta">▲</span>06</span></td>
+<td rowspan="2" class='compact'><code>vuln_6</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a></td>
+<td>Stack-based Buffer Overflow</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/20.html" title="Improper Input Validation">CWE-20</a></td>
+<td>Improper Input Validation</td>
+</tr>
+<tr>
+<td rowspan="2"><span class="lang-tag">Java</span></td>
+<td rowspan="2" class='center'>P2</td>
+<td rowspan="2"><a href='https://github.com/aixcc-afc/round-final-phase2-poi'>poi</a></td>
+<td rowspan="2" class='compact'><span class="cpv-name">po1<span class="mode-mark full">□</span>00</span></td>
+<td rowspan="2" class='compact'><code>vuln_0</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/834.html" title="Excessive Iteration">CWE-834</a></td>
+<td>Excessive Iteration</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/20.html" title="Improper Input Validation">CWE-20</a></td>
+<td>Improper Input Validation</td>
+</tr>
+<tr>
+<td rowspan="3"><span class="lang-tag">Java</span></td>
+<td rowspan="3" class='center'>P2</td>
+<td rowspan="3"><a href='https://github.com/aixcc-afc/round-final-phase2-poi'>poi</a></td>
+<td rowspan="3" class='compact'><span class="cpv-name">po1<span class="mode-mark full">□</span>01</span></td>
+<td rowspan="3" class='compact'><code>vuln_1</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/789.html" title="Memory Allocation with Excessive Size Value">CWE-789</a></td>
+<td>Memory Allocation with Excessive Size Value</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/770.html" title="Allocation of Resources Without Limits or Throttling">CWE-770</a></td>
+<td>Allocation of Resources Without Limits or Throttling</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/20.html" title="Improper Input Validation">CWE-20</a></td>
+<td>Improper Input Validation</td>
+</tr>
+<tr>
+<td rowspan="2"><span class="lang-tag">Java</span></td>
+<td rowspan="2" class='center'>P2</td>
+<td rowspan="2"><a href='https://github.com/aixcc-afc/round-final-phase2-poi'>poi</a></td>
+<td rowspan="2" class='compact'><span class="cpv-name">po1<span class="mode-mark full">□</span>02</span></td>
+<td rowspan="2" class='compact'><code>vuln_2</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/35.html" title="Path Traversal: &#x27;.../...//&#x27;">CWE-35</a></td>
+<td>Path Traversal: &#x27;.../...//&#x27;</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/20.html" title="Improper Input Validation">CWE-20</a></td>
+<td>Improper Input Validation</td>
+</tr>
+<tr>
+<td rowspan="2"><span class="lang-tag">Java</span></td>
+<td rowspan="2" class='center'>P2</td>
+<td rowspan="2"><a href='https://github.com/aixcc-afc/round-final-phase2-poi'>poi</a></td>
+<td rowspan="2" class='compact'><span class="cpv-name">po1<span class="mode-mark full">□</span>03</span></td>
+<td rowspan="2" class='compact'><code>vuln_3</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/695.html" title="Use of Low-Level Functionality">CWE-695</a></td>
+<td>Use of Low-Level Functionality</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/20.html" title="Improper Input Validation">CWE-20</a></td>
+<td>Improper Input Validation</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-poi'>poi</a></td>
+<td class='compact'><span class="cpv-name">po1<span class="mode-mark full">□</span>04</span></td>
+<td class='compact'><code>vuln_4</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/382.html" title="J2EE Bad Practices: Use of System.exit()">CWE-382</a></td>
+<td>J2EE Bad Practices: Use of System.exit()</td>
+</tr>
+<tr>
+<td rowspan="2"><span class="lang-tag">Java</span></td>
+<td rowspan="2" class='center'>P6</td>
+<td rowspan="2"><a href='https://github.com/aixcc-afc/round-final-phase6-logging-log4j2'>logging-log4j2</a></td>
+<td rowspan="2" class='compact'><span class="cpv-name">lj1<span class="mode-mark delta">▲</span>00</span></td>
+<td rowspan="2" class='compact'><code>vuln_0</code></td>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/917.html" title="Improper Neutralization of Special Elements used in an Expression Language Statement (&#x27;Expression Language Injection&#x27;)">CWE-917</a></td>
+<td>Improper Neutralization of Special Elements used in an Expression Language Statement (&#x27;Expression Language Injection&#x27;)</td>
+</tr>
+<tr>
+<td class='compact'><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/20.html" title="Improper Input Validation">CWE-20</a></td>
+<td>Improper Input Validation</td>
+</tr>
+</tbody></table></div>
+<p class="footnotes"><span class="mode-mark delta">▲</span> delta-mode &nbsp; <span class="mode-mark full">□</span> full-mode. Multi-CWE CPVs span multiple rows.</p>
+</section>
+
+
+<section id="zeroday-details">
+<h2><span class="appendix-tag">Appendix H</span>0-Day Details<a class="anchor-link" href="#zeroday-details">¶</a></h2>
+
+<p>
+Detailed information about 0-day vulnerabilities discovered during the competition.
+</p>
+
+<div class="table-wrap"><table class="data">
+<thead><tr>
+<th>Lang</th><th>Ph</th><th>Project</th><th>ID</th><th>Description</th>
+</tr></thead><tbody>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-little-cms'>little-cms</a></td>
+<td class='compact'><span class="cpv-name">cm1<span class="mode-mark full">□</span>a</span></td>
+<td>UBSan: Signed integer overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-curl'>curl</a></td>
+<td class='compact'><span class="cpv-name">cu5<span class="mode-mark delta">▲</span>a</span></td>
+<td>ASan: Heap buffer overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-curl'>curl</a></td>
+<td class='compact'><span class="cpv-name">cu5<span class="mode-mark delta">▲</span>b</span></td>
+<td>ASan: Abort signal</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-curl'>curl</a></td>
+<td class='compact'><span class="cpv-name">cu5<span class="mode-mark delta">▲</span>c</span></td>
+<td>ASan: Segmentation fault</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-mongoose'>mongoose</a></td>
+<td class='compact'><span class="cpv-name">mg1<span class="mode-mark full">□</span>a</span></td>
+<td>ASan: Memory leak</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-shadowsocks-libev'>shadowsocks-libev</a></td>
+<td class='compact'><span class="cpv-name">ss1<span class="mode-mark full">□</span>a</span></td>
+<td>UBSan: Signed integer overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-shadowsocks-libev'>shadowsocks-libev</a></td>
+<td class='compact'><span class="cpv-name">ss1<span class="mode-mark full">□</span>b</span></td>
+<td>UBSan: Signed integer overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-shadowsocks-libev'>shadowsocks-libev</a></td>
+<td class='compact'><span class="cpv-name">ss1<span class="mode-mark full">□</span>c</span></td>
+<td>UBSan: Signed integer overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-systemd'>systemd</a></td>
+<td class='compact'><span class="cpv-name">sd1<span class="mode-mark full">□</span>a</span></td>
+<td>ASan: Abort signal</td>
+</tr>
+<tr>
+<td><span class="lang-tag">C</span></td>
+<td class='center'>P3</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase3-wireshark'>wireshark</a></td>
+<td class='compact'><span class="cpv-name">ws1<span class="mode-mark full">□</span>a</span></td>
+<td>ASan: Stack buffer overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-healthcare-data-harmonization'>healthcare-data-harmonization</a></td>
+<td class='compact'><span class="cpv-name">hc1<span class="mode-mark full">□</span>a</span></td>
+<td>Stack overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-Hertzbeat'>Hertzbeat</a></td>
+<td class='compact'><span class="cpv-name">hb1<span class="mode-mark full">□</span>a</span></td>
+<td>Out of memory</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td class='compact'><span class="cpv-name">pb1<span class="mode-mark delta">▲</span>a</span></td>
+<td>Stack overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td class='compact'><span class="cpv-name">pb1<span class="mode-mark delta">▲</span>b</span></td>
+<td>Out of memory</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td class='compact'><span class="cpv-name">pb1<span class="mode-mark delta">▲</span>c</span></td>
+<td>Stack overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td class='compact'><span class="cpv-name">pb1<span class="mode-mark full">□</span>d</span></td>
+<td>Out of memory</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td class='compact'><span class="cpv-name">pb1<span class="mode-mark full">□</span>e</span></td>
+<td>Stack overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td class='compact'><span class="cpv-name">pb1<span class="mode-mark full">□</span>f</span></td>
+<td>Stack overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td class='compact'><span class="cpv-name">pb1<span class="mode-mark full">□</span>g</span></td>
+<td>Class not found</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td class='compact'><span class="cpv-name">pb1<span class="mode-mark full">□</span>h</span></td>
+<td>Stack overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-pdfbox'>pdfbox</a></td>
+<td class='compact'><span class="cpv-name">pb1<span class="mode-mark full">□</span>i</span></td>
+<td>Stack overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-poi'>poi</a></td>
+<td class='compact'><span class="cpv-name">po1<span class="mode-mark full">□</span>a</span></td>
+<td>Out of memory</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-poi'>poi</a></td>
+<td class='compact'><span class="cpv-name">po1<span class="mode-mark full">□</span>b</span></td>
+<td>Out of memory</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-poi'>poi</a></td>
+<td class='compact'><span class="cpv-name">po1<span class="mode-mark full">□</span>c</span></td>
+<td>Stack overflow</td>
+</tr>
+<tr>
+<td><span class="lang-tag">Java</span></td>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-poi'>poi</a></td>
+<td class='compact'><span class="cpv-name">po1<span class="mode-mark full">□</span>d</span></td>
+<td>Out of memory</td>
+</tr>
+</tbody></table></div>
+<p class="footnotes"><span class="mode-mark delta">▲</span> delta-mode &nbsp; <span class="mode-mark full">□</span> full-mode.</p>
+</section>
+
+
+<section id="sarif-broadcasts">
+<h2><span class="appendix-tag">Appendix I</span>SARIF Broadcast Details<a class="anchor-link" href="#sarif-broadcasts">¶</a></h2>
+
+<p>
+Detailed information about each SARIF broadcast in the AIxCC final round.
+</p>
+
+<div class="table-wrap"><table class="data">
+<thead><tr>
+<th>Ph</th><th>Project</th><th>Lang</th><th>Label</th><th>Answer</th>
+</tr></thead><tbody>
+<tr>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-little-cms'>little-cms</a></td>
+<td><span class="lang-tag">C</span></td>
+<td class='compact'><span class="cpv-name">cm1<span class="mode-mark full">□</span>01</span></td>
+<td class='compact'><span class='good'>CORRECT</span></td>
+</tr>
+<tr>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-curl'>curl</a></td>
+<td><span class="lang-tag">C</span></td>
+<td class='compact'><span class="cpv-name">cu3<span class="mode-mark delta">▲</span><span class="mode-mark zd">⊝</span></span></td>
+<td class='compact'><span class='bad'>INCORRECT</span></td>
+</tr>
+<tr>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-libexif'>libexif</a></td>
+<td><span class="lang-tag">C</span></td>
+<td class='compact'><span class="cpv-name">ex2<span class="mode-mark delta">▲</span><span class="mode-mark zd">⊝</span></span></td>
+<td class='compact'><span class='bad'>INCORRECT</span></td>
+</tr>
+<tr>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-freerdp'>freerdp</a></td>
+<td><span class="lang-tag">C</span></td>
+<td class='compact'><span class="cpv-name">fp2<span class="mode-mark delta">▲</span>02</span></td>
+<td class='compact'><span class='good'>CORRECT</span></td>
+</tr>
+<tr>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-poi'>poi</a></td>
+<td><span class="lang-tag">Java</span></td>
+<td class='compact'><span class="cpv-name">po1<span class="mode-mark full">□</span>02</span></td>
+<td class='compact'><span class='good'>CORRECT</span></td>
+</tr>
+<tr>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-shadowsocks-libev'>shadowsocks-libev</a></td>
+<td><span class="lang-tag">C</span></td>
+<td class='compact'><span class="cpv-name">ss1<span class="mode-mark full">□</span>00</span></td>
+<td class='compact'><span class='good'>CORRECT</span></td>
+</tr>
+<tr>
+<td class='center'>P2</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase2-systemd'>systemd</a></td>
+<td><span class="lang-tag">C</span></td>
+<td class='compact'><span class="cpv-name">sd1<span class="mode-mark full">□</span>04</span></td>
+<td class='compact'><span class='good'>CORRECT</span></td>
+</tr>
+<tr>
+<td class='center'>P6</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase6-logging-log4j2'>logging-log4j2</a></td>
+<td><span class="lang-tag">Java</span></td>
+<td class='compact'><span class="cpv-name">lj1<span class="mode-mark delta">▲</span>00</span></td>
+<td class='compact'><span class='good'>CORRECT</span></td>
+</tr>
+<tr>
+<td class='center'>P7</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase7-wireshark'>wireshark</a></td>
+<td><span class="lang-tag">C</span></td>
+<td class='compact'><span class="cpv-name">ws1<span class="mode-mark delta">▲</span>03</span></td>
+<td class='compact'><span class='good'>CORRECT</span></td>
+</tr>
+<tr>
+<td class='center'>P7</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase7-wireshark'>wireshark</a></td>
+<td><span class="lang-tag">C</span></td>
+<td class='compact'><span class="cpv-name">ws2<span class="mode-mark delta">▲</span><span class="mode-mark zd">⊝</span></span></td>
+<td class='compact'><span class='bad'>INCORRECT</span></td>
+</tr>
+<tr>
+<td class='center'>P7</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase7-wireshark'>wireshark</a></td>
+<td><span class="lang-tag">C</span></td>
+<td class='compact'><span class="cpv-name">ws3<span class="mode-mark delta">▲</span><span class="mode-mark zd">⊝</span></span></td>
+<td class='compact'><span class='bad'>INCORRECT</span></td>
+</tr>
+<tr>
+<td class='center'>P7</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase7-wireshark'>wireshark</a></td>
+<td><span class="lang-tag">C</span></td>
+<td class='compact'><span class="cpv-name">ws4<span class="mode-mark delta">▲</span><span class="mode-mark zd">⊝</span></span></td>
+<td class='compact'><span class='bad'>INCORRECT</span></td>
+</tr>
+<tr>
+<td class='center'>P7</td>
+<td><a href='https://github.com/aixcc-afc/round-final-phase7-xz'>xz</a></td>
+<td><span class="lang-tag">C</span></td>
+<td class='compact'><span class="cpv-name">xz1<span class="mode-mark full">□</span>01</span></td>
+<td class='compact'><span class='good'>CORRECT</span></td>
+</tr>
+</tbody></table></div>
+<p class="footnotes"><span class="mode-mark delta">▲</span> delta-mode &nbsp; <span class="mode-mark full">□</span> full-mode &nbsp; <span class="mode-mark zd">⊝</span> false-positive broadcast (no underlying CPV).</p>
+</section>
+
+
+<section id="submission-timing">
+<h2><span class="appendix-tag">Appendix J</span>Submission Timing<a class="anchor-link" href="#submission-timing">¶</a></h2>
+
+<p>
+The figures below show per-team submission timing.
+Most teams front-load within the first quarter, consistent with time-decay scoring.
+SARIF is the fastest (avg 5.6%) as it triggers upon broadcast;
+bundles are the latest (avg 35.8%) as they depend on prior submissions and are scored at the end.
+<span class="cpv-name">Artiphishell</span> is a notable outlier, spreading submissions across the entire window.
+</p>
+
+<div class="figure-grid-2">
+  <div class="figure">
+    <img src="assets/figures/submission-timing-pov.png" alt="PoV submission timing">
+    <p class="figure-caption"><span class="caption-label">(a) PoV.</span> n = 2519, avg = 25.0%</p>
+  </div>
+  <div class="figure">
+    <img src="assets/figures/submission-timing-patch.png" alt="Patch submission timing">
+    <p class="figure-caption"><span class="caption-label">(b) Patch.</span> n = 283, avg = 23.8%</p>
+  </div>
+  <div class="figure">
+    <img src="assets/figures/submission-timing-sarif.png" alt="SARIF submission timing">
+    <p class="figure-caption"><span class="caption-label">(c) SARIF.</span> n = 48, avg = 5.6%</p>
+  </div>
+  <div class="figure">
+    <img src="assets/figures/submission-timing-bundle.png" alt="Bundle submission timing">
+    <p class="figure-caption"><span class="caption-label">(d) Bundle.</span> n = 99, avg = 35.8%</p>
+  </div>
+</div>
+
+<p class="footnotes">
+Each task has a fixed time window (12h for full-mode, 6h for delta-mode);
+0% is when the task opens, 100% is the deadline.
+</p>
+</section>
+
+
+<section id="cwe-analysis">
+<h2><span class="appendix-tag">Appendix K</span>CWE-Wise Performance Analysis<a class="anchor-link" href="#cwe-analysis">¶</a></h2>
+
+<p>
+The heatmaps below show CWE-wise team performance for PoV generation and patch generation, respectively.
+</p>
+
+<div class="callout">
+<strong>Note.</strong>
+0-day CPVs are excluded as they are still under procedural review
+and do not yet have confirmed CWE classifications. The figures will be updated once available.
+</div>
+
+<div class="figure">
+  <object data="assets/figures/cwe-pov-gen.svg" type="image/svg+xml" width="100%"></object>
+  <p class="figure-caption"><span class="caption-label">Figure K1.</span>
+  CWE-wise PoV generation performance heatmap.</p>
+</div>
+
+<div class="figure">
+  <object data="assets/figures/cwe-patch-gen.svg" type="image/svg+xml" width="100%"></object>
+  <p class="figure-caption"><span class="caption-label">Figure K2.</span>
+  CWE-wise patch generation performance heatmap.</p>
+</div>
+</section>
+
+  </main>
+</div>
+<script src="js/main.js?v=c5fe72c0"></script>
+</body>
+</html>

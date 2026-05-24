@@ -1,0 +1,610 @@
+/* AIxCC SoK Companion — clean academic stylesheet */
+
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f6f7f9;
+  --bg-code: #f1f3f5;
+  --border: #e2e4e9;
+  --border-strong: #c8ccd2;
+  --text: #1a1f29;
+  --text-soft: #4a5160;
+  --text-muted: #717789;
+  --link: #1f4cdb;
+  --link-hover: #0a2da8;
+  --accent: #0a2da8;
+  --row-alt: #f7f8fb;
+  --table-head: #eef0f4;
+  --tag-bg: #eef2ff;
+  --tag-fg: #2a3eb1;
+  --good: #1b7a3a;
+  --bad: #b3262a;
+  --sidebar-width: 280px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Charter", "Iowan Old Style", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* long unbreakable tokens (URLs, hashes, file paths) — break inside content
+   rather than push the column wider than the viewport */
+section,
+section p,
+section li,
+.team-entry,
+.figure-caption,
+.callout,
+.footnotes {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+code, pre, .mono, .cpv-name {
+  font-family: "JetBrains Mono", "SF Mono", "Menlo", "Consolas", monospace;
+  font-size: 0.92em;
+}
+
+/* layout — desktop uses a fixed sidebar (independent of body scroll,
+   so it cannot disappear when content scrolls) plus a content area
+   that leaves a gutter on the left equal to the sidebar width. */
+.layout { min-height: 100vh; }
+
+main.content { min-width: 0; }
+
+aside.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--bg-soft);
+  border-right: 1px solid var(--border);
+  padding: 1.4rem 1.2rem 2rem;
+  font-size: 0.92rem;
+  /* Above the backdrop so the TOC isn't dimmed and is clickable. */
+  z-index: 30;
+}
+
+main.content { margin-left: var(--sidebar-width); }
+
+aside.sidebar nav a { overflow-wrap: anywhere; }
+
+/* --- mobile / narrow: hide the sidebar, expose a floating TOC button
+   that opens a slide-in drawer ----------------------------------- */
+.toc-toggle {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  /* Above the sidebar so the close affordance is never hidden. */
+  z-index: 40;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(10, 45, 168, 0.35);
+  display: none;             /* hidden by default; shown via media query */
+  align-items: center;
+  justify-content: center;
+}
+.toc-toggle:hover { background: var(--link-hover); }
+
+.toc-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  /* Below the sidebar (which is z-index: 30) so the TOC sits ON TOP of
+     the dim overlay — only the page content gets dimmed, not the menu. */
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s;
+}
+body.toc-open .toc-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+aside.sidebar h1 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+aside.sidebar h1 a { color: var(--text); text-decoration: none; }
+aside.sidebar h1 a:hover { color: var(--link); }
+
+.sidebar .subtitle {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 0 0 1.2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.sidebar nav ol,
+.sidebar nav ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.sidebar nav > ol > li {
+  margin: 0.15rem 0;
+}
+
+.sidebar nav a {
+  display: block;
+  color: var(--text-soft);
+  text-decoration: none;
+  padding: 0.22rem 0.5rem;
+  border-radius: 4px;
+  line-height: 1.35;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.sidebar nav a:hover { background: #e5e8ee; color: var(--text); }
+
+.sidebar nav a.active {
+  background: #dfe4ef;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.sidebar .nav-section-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin: 1.1rem 0 0.3rem 0.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 600;
+}
+
+main.content {
+  padding: 2.5rem clamp(1rem, 4vw, 3rem) 6rem;
+  /* Outer cap prevents very wide monitors (2K/4K) from spreading a
+     14-column table into a sparse grid. NOTE: never set width:100%
+     here — combined with margin-left:280px (the fixed-sidebar gutter)
+     it would push the box wider than the viewport. Default `width:auto`
+     for block elements already fills "parent − margins". */
+  max-width: 1400px;
+}
+
+/* --- unified content column ---------------------------------------
+   Every block — prose, titles, tables, formulas — caps at the same
+   width and centers itself, giving one tidy column with consistent
+   left/right edges at every viewport size.
+
+   Figures are an exception: they cap at a smaller width (≈ their
+   natural display resolution) so that on wide monitors they don't
+   stretch into a pixelated / sparse rendering. They still shrink
+   with the viewport when the screen is narrower.
+*/
+.hero,
+section > h2,
+section > h3,
+section > h4,
+section > p,
+section > ul,
+section > ol,
+section > .callout,
+section > .team-list,
+section > .footnotes,
+section > .table-wrap {
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* figures — capped narrower; still fluid downward */
+section > .figure,
+section > .figure-grid-2 {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* formulas need !important because MathJax injects its own style attr */
+section > mjx-container[display="true"] {
+  max-width: 1300px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* hero */
+.hero {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  /* fluid type — scales between mobile (~26px) and desktop (~31px) */
+  font-size: clamp(1.4rem, 1.05rem + 1.6vw, 1.95rem);
+  line-height: 1.25;
+  margin: 0 0 0.7rem;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+.hero .lead {
+  color: var(--text-soft);
+  font-size: 1.05rem;
+  margin-block: 0 1.2rem;
+  /* no max-width — inherits the .hero column width (1300px max) so the
+     hero text aligns with everything else below it */
+}
+
+.hero .meta {
+  font-size: 0.85rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text-muted);
+}
+
+.hero .meta a {
+  color: var(--link);
+  margin-right: 1rem;
+}
+
+/* sections */
+section {
+  margin-top: 3rem;
+  scroll-margin-top: 1rem;
+}
+
+section > h2 {
+  font-size: 1.4rem;
+  line-height: 1.3;
+  margin-block: 0 0.4rem;     /* vertical only; preserves margin-inline: auto */
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: -0.005em;
+}
+
+section > h2 .appendix-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-right: 0.6rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+section h3 {
+  font-size: 1.08rem;
+  margin-block: 1.6rem 0.5rem;
+  font-weight: 700;
+}
+
+section h4 {
+  font-size: 0.98rem;
+  margin-block: 1.2rem 0.4rem;
+  font-weight: 700;
+}
+
+section p {
+  /* margin-block (vertical-only) — must NOT touch left/right margins or
+     the `margin-left: auto` centering rule above is silently overridden. */
+  margin-block: 0.6rem;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+section ul, section ol {
+  margin-block: 0.6rem;
+  padding-left: 1.4rem;
+}
+section li {
+  margin-block: 0.25rem;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+/* hero lead is short — left-align reads better than justified */
+.hero .lead { text-align: left; hyphens: manual; }
+
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; }
+
+/* anchor-link sigil */
+.anchor-link {
+  margin-left: 0.4em;
+  color: var(--text-muted);
+  font-weight: normal;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  font-size: 0.85em;
+}
+
+section h2:hover .anchor-link,
+section h3:hover .anchor-link { opacity: 1; }
+
+/* code */
+code { background: var(--bg-code); padding: 0.05em 0.35em; border-radius: 3px; }
+pre  { background: var(--bg-code); padding: 0.8rem 1rem; border-radius: 6px; overflow-x: auto; }
+pre code { background: none; padding: 0; }
+
+/* figures */
+.figure {
+  margin-block: 1.4rem;
+}
+
+.figure img,
+.figure object,
+.figure embed {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: white;
+}
+
+.figure svg { display: block; max-width: 100%; height: auto; }
+
+.figure-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.figure-grid-2 .figure { margin: 0; }
+
+.figure-caption {
+  font-size: 0.86rem;
+  color: var(--text-soft);
+  margin-top: 0.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.4;
+}
+
+.figure-caption .caption-label {
+  font-weight: 700;
+  color: var(--text);
+  margin-right: 0.4em;
+}
+
+/* tables */
+.table-wrap {
+  overflow-x: auto;
+  overflow-y: hidden;          /* prevent the spec's vertical-axis upgrade */
+  margin-block: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  /* Right-edge fade hints at scrollable content when the table overflows.
+     Uses the "scroll shadow" trick: a fixed-position background plus
+     a scroll-color local background that masks the shadow when fully
+     scrolled to either edge. */
+  background:
+    linear-gradient(to right, white 30%, rgba(255,255,255,0)),
+    linear-gradient(to right, rgba(255,255,255,0), white 70%) 100% 0,
+    radial-gradient(farthest-side at 0 50%, rgba(0,0,0,0.15), rgba(0,0,0,0)),
+    radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,0.15), rgba(0,0,0,0)) 100% 0;
+  background-repeat: no-repeat;
+  background-size: 32px 100%, 32px 100%, 14px 100%, 14px 100%;
+  background-attachment: local, local, scroll, scroll;
+}
+
+table.data {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: white;
+}
+
+table.data th,
+table.data td {
+  padding: 0.45rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+table.data thead th {
+  background: var(--table-head);
+  font-weight: 700;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+table.data tbody tr:nth-child(even) td { background: var(--row-alt); }
+
+table.data tbody tr:hover td { background: #eef5ff; }
+
+table.data td.num,
+table.data th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+table.data td.center,
+table.data th.center { text-align: center; }
+
+table.data td.compact { white-space: nowrap; }
+
+table.data .lang-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.05em 0.45em;
+  border-radius: 3px;
+  background: var(--tag-bg);
+  color: var(--tag-fg);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+table.data .mode-full   { color: #555; }
+table.data .mode-delta  { color: #555; }
+
+table.data .cpv-name { color: #2a3eb1; }
+
+table.data .desc {
+  max-width: 38rem;
+  font-family: "Charter", "Iowan Old Style", Georgia, serif;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+table.data .cwe-link { white-space: nowrap; }
+
+/* footnotes / mini-notes */
+.footnotes {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  margin-top: 0.6rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.footnotes ul { padding-left: 1.2rem; margin: 0.3rem 0; }
+
+/* MathJax — center every display equation within the same 72ch column
+   as the paragraphs above/below. Width is the min of 72ch and the actual
+   container so the formula never widens the page on a narrow viewport. */
+mjx-container { font-size: 1em !important; }
+mjx-container[display="true"] {
+  display: block !important;
+  text-align: center !important;
+  /* Fill the unified content column; center math within it. */
+  width: 100%;
+  max-width: 100%;
+  margin-block: 0.8rem !important;
+}
+
+/* callout / info box */
+.callout {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  background: #f4f6ff;
+  padding: 0.9rem 1.1rem;
+  border-radius: 4px;
+  margin-block: 1.2rem;
+  font-size: 0.93rem;
+}
+.callout strong { color: var(--accent); }
+
+/* team materials (open science) — simple vertical list */
+.team-list {
+  margin-block: 1rem;
+}
+
+.team-entry {
+  padding: 0.7rem 0 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.team-entry:last-child { border-bottom: none; }
+
+.team-entry h4.team-name {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.team-entry h4.team-name code {
+  background: var(--bg-code);
+  padding: 0.05em 0.4em;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+.team-entry .team-name-text { margin-left: 0.15rem; }
+
+.team-entry .team-rank {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 0.05em 0.45em;
+  margin-left: 0.2rem;
+  border-radius: 3px;
+  background: var(--tag-bg);
+  color: var(--tag-fg);
+  font-weight: 600;
+  vertical-align: 0.05em;
+}
+
+.team-entry .team-org {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.team-entry ul.team-links {
+  margin: 0.25rem 0 0 1.1rem;
+  padding: 0;
+  list-style: disc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+}
+
+.team-entry ul.team-links li { margin: 0.15rem 0; }
+.team-entry ul.team-links li.placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+  list-style: none;
+  margin-left: -1.1rem;
+}
+
+/* misc inline marks */
+.mode-mark { display: inline-block; line-height: 1; font-size: 0.95em; }
+.mode-mark.delta { color: #444; }
+.mode-mark.full  { color: #444; }
+.mode-mark.zd    { color: #b3262a; font-weight: 600; }
+
+.center { text-align: center; }
+.muted  { color: var(--text-muted); }
+
+/* narrow viewport — hide the fixed sidebar, expose the floating
+   TOC button. The sidebar becomes a slide-in drawer toggled by JS. */
+@media (max-width: 1000px) {
+  main.content { margin-left: 0; }
+  aside.sidebar {
+    /* off-screen by default; slides in when body.toc-open is set */
+    transform: translateX(-100%);
+    transition: transform 0.22s ease-out;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.18);
+    width: min(320px, 86vw);
+  }
+  body.toc-open aside.sidebar { transform: translateX(0); }
+  .toc-toggle { display: flex; }
+  .figure-grid-2 { grid-template-columns: 1fr; }
+}
+
+/* phone — table density and font tweaks */
+@media (max-width: 640px) {
+  section > h2 { font-size: 1.2rem; }
+  table.data { font-size: 0.78rem; }
+  table.data th, table.data td { padding: 0.35rem 0.5rem; }
+}
+
+@media print {
+  aside.sidebar { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  main.content { padding: 0; max-width: none; }
+}

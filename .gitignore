@@ -1,0 +1,11 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+
+# Python bytecode from build.py
+__pycache__/
+*.pyc
+*.pyo
