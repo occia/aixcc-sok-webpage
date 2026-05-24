@@ -409,7 +409,7 @@ def render_sarif_table(rows: list[dict]) -> str:
 # ---------------------------------------------------------------------------
 SECTION_TOKEN = """
 <section id="token-consumption">
-<h2><span class="appendix-tag">Appendix C</span>Token Consumption Details<a class="anchor-link" href="#token-consumption">¶</a></h2>
+<h2>Token Consumption Details<a class="anchor-link" href="#token-consumption">¶</a></h2>
 
 <p>
 The figures below show the per-model token consumption and the input-to-output token ratio per model.
@@ -435,7 +435,7 @@ the figures do not present full usage but serve as a lower-bound reference.
 
 SECTION_SCORING = r"""
 <section id="scoring">
-<h2><span class="appendix-tag">Appendix D</span>Scoring Details<a class="anchor-link" href="#scoring">¶</a></h2>
+<h2>Scoring Rules Explanation<a class="anchor-link" href="#scoring">¶</a></h2>
 
 <p>
 The scoring system is centered around a developer-centric principle:
@@ -567,7 +567,7 @@ This cross-team validation also reflects one collaboration approach among CRSs i
 
 SECTION_SARIF_TECHNIQUES = """
 <section id="sarif-techniques">
-<h2><span class="appendix-tag">Appendix E</span>SARIF Validation Techniques<a class="anchor-link" href="#sarif-techniques">¶</a></h2>
+<h2>SARIF Validation Techniques<a class="anchor-link" href="#sarif-techniques">¶</a></h2>
 
 <p>The table below summarizes how each finalist team validates broadcast SARIF reports.</p>
 
@@ -647,7 +647,7 @@ SECTION_SARIF_TECHNIQUES = """
 
 SECTION_SUBMISSION_TIMING = """
 <section id="submission-timing">
-<h2><span class="appendix-tag">Appendix J</span>Submission Timing<a class="anchor-link" href="#submission-timing">¶</a></h2>
+<h2>Submission Timing<a class="anchor-link" href="#submission-timing">¶</a></h2>
 
 <p>
 The figures below show per-team submission timing.
@@ -686,7 +686,7 @@ Each task has a fixed time window (12h for full-mode, 6h for delta-mode);
 
 SECTION_CWE_HEATMAPS = """
 <section id="cwe-analysis">
-<h2><span class="appendix-tag">Appendix K</span>CWE-Wise Performance Analysis<a class="anchor-link" href="#cwe-analysis">¶</a></h2>
+<h2>CWE-Wise Performance Analysis<a class="anchor-link" href="#cwe-analysis">¶</a></h2>
 
 <p>
 The heatmaps below show CWE-wise team performance for PoV generation and patch generation, respectively.
@@ -715,19 +715,17 @@ and do not yet have confirmed CWE classifications. The figures will be updated o
 
 SECTION_HERO = """
 <header class="hero">
-  <h1>AIxCC SoK — Companion Site</h1>
+  <h1>SoK: DARPA's AI Cyber Challenge (AIxCC) — Competition Design, Architectures, and Lessons Learned</h1>
   <p class="lead">
-    Extended appendices and curated open-science material for
-    <em>SoK: DARPA's AI Cyber Challenge (AIxCC) — Competition Design, Architectures, and Lessons Learned</em>.
-    Page-limit constraints in the paper push the long-form appendices off-paper;
-    this site mirrors that material so it remains browsable, citable, and searchable.
+    Companion site for the AIxCC SoK study —
+    a single entry point that compiles all of the study's references, artifacts,
+    supplemental analysis, and the participating teams' public materials.
   </p>
   <p class="meta">
-    <a href="#open-science">Open Science &amp; Team Materials</a>
-    <a href="#token-consumption">Appendices C–K</a>
-    <!-- TODO: replace with the arXiv / USENIX PDF URL once published -->
-    <a href="https://example.com/aixcc-sok.pdf">Main paper (PDF) — <em>to be updated</em></a>
-    <a href="https://zenodo.org/records/20367274">Artifact (Zenodo)</a>
+    <a href="#open-science">SoK Artifact</a>
+    <a href="#team-materials">Teams' Public References</a>
+    <a href="#scoring">Supplemental Analysis</a>
+    <a href="https://arxiv.org/abs/2602.07666">Arxiv Paper</a>
   </p>
 </header>
 """
@@ -818,7 +816,6 @@ def render_open_science() -> str:
             f'  <h4 class="team-name">'
             f'    <code>{esc(t["key"])}</code> '
             f'    <span class="team-name-text">{esc(t["name"])}</span> '
-            f'    <span class="team-rank">{esc(t["rank"])}</span> '
             f'    <span class="team-org">— {esc(t["org"])}</span>'
             f'  </h4>'
             f'  <ul class="team-links">{"".join(links_html)}</ul>'
@@ -827,46 +824,33 @@ def render_open_science() -> str:
     cards_html = "\n".join(blocks)
     return f"""
 <section id="open-science">
-<h2><span class="appendix-tag">Open Science</span>Materials &amp; Team Collection<a class="anchor-link" href="#open-science">¶</a></h2>
+<h2><span class="appendix-tag">Open Science</span>SoK Artifact<a class="anchor-link" href="#open-science">¶</a></h2>
 
 <p>
-All data, scripts, finalist team questionnaires, and meeting notes are archived in the
-SoK artifact, with this companion website indexing the artifact, the extended analysis below,
-and public finalist documentation. Competition data and the analysis framework await DARPA's
-official release.
+Some materials respect DARPA's official release timeline and are not yet public.
 </p>
 
-<h3>Already available</h3>
+<h3>Currently available</h3>
 <ul>
-  <li><strong>SoK Artifact.</strong> Zenodo bundle containing questionnaires, meeting notes, sanitized
-      experiment data (PF / MR / CC), and analysis scripts —
-      <a href="https://zenodo.org/records/20367274">zenodo.org/records/20367274</a>.</li>
-  <li><strong>Companion website.</strong> This site (<code>github.io</code> mirror of the appendix tables).</li>
-  <li><strong>Public finalist documentation.</strong> Linked below by team.</li>
+  <li>Questionnaires, meeting notes, sanitized experiment data (PF / MR / CC), and analysis scripts —
+      Zenodo bundle at <a href="https://zenodo.org/records/20367274">zenodo.org/records/20367274</a>.</li>
+  <li>Official challenge sets &amp; harnesses, released by the organizers as
+      <em>CRSBench</em> — <a href="https://oss-crs.openssf.org/crsbench">oss-crs.openssf.org/crsbench</a>.</li>
 </ul>
 
-<h3>Pending DARPA release</h3>
+<h3>Pending release</h3>
 <ul>
   <li>Raw competition data (submission logs, OTEL traces, scoring breakdowns).</li>
-  <li>The official challenge sets &amp; harnesses (organizer-hosted repositories).</li>
-  <li>Reference analysis framework used by the organizers.</li>
+  <li><strong>CRUMBS</strong> — the organizers' competition data analysis framework.</li>
 </ul>
+</section>
 
-<h3>Team materials</h3>
-<p>
-Curated public materials from each finalist — CRS source code, technical reports, post-mortems, and blogs.
-Placeholders mark teams that have not yet released a written post-mortem or blog; this section will
-be updated as new artifacts become available.
-</p>
+<section id="team-materials">
+<h2><span class="appendix-tag">Open Science</span>Collection of Teams' Public References<a class="anchor-link" href="#team-materials">¶</a></h2>
 
 <div class="team-list">
 {cards_html}
 </div>
-
-<p class="footnotes">
-Teams are ordered by final-round AFC score (AT → LC). Each <code>code</code>-tagged label
-is the two-letter abbreviation used throughout the paper and the tables below.
-</p>
 </section>
 """
 
@@ -875,18 +859,19 @@ is the two-letter abbreviation used throughout the paper and the tables below.
 # Top-level page assembly
 # ---------------------------------------------------------------------------
 NAV_ITEMS = [
-    ("nav-label", "Front matter", []),
-    ("link", "Open Science &amp; Team Collection", "#open-science"),
-    ("nav-label", "Appendix sections", []),
-    ("link", "C — Token Consumption", "#token-consumption"),
-    ("link", "D — Scoring Details", "#scoring"),
-    ("link", "E — SARIF Validation Techniques", "#sarif-techniques"),
-    ("link", "F — Challenge Project (CP) Details", "#cp-details"),
-    ("link", "G — Challenge Project Vulnerability (CPV) Details", "#cpv-details"),
-    ("link", "H — 0-Day Details", "#zeroday-details"),
-    ("link", "I — SARIF Broadcast Details", "#sarif-broadcasts"),
-    ("link", "J — Submission Timing", "#submission-timing"),
-    ("link", "K — CWE-Wise Performance", "#cwe-analysis"),
+    ("nav-label", "Open Science", []),
+    ("link", "SoK Artifact", "#open-science"),
+    ("link", "Collection of Teams' Public References", "#team-materials"),
+    ("nav-label", "Supplemental Analysis", []),
+    ("link", "Scoring Rules Explanation", "#scoring"),
+    ("link", "Challenge Project (CP) Details", "#cp-details"),
+    ("link", "Challenge Project Vulnerability (CPV) Details", "#cpv-details"),
+    ("link", "SARIF Validation Techniques", "#sarif-techniques"),
+    ("link", "Token Consumption", "#token-consumption"),
+    ("link", "SARIF Broadcast Details", "#sarif-broadcasts"),
+    ("link", "0-Day Details", "#zeroday-details"),
+    ("link", "Submission Timing", "#submission-timing"),
+    ("link", "CWE-Wise Performance", "#cwe-analysis"),
 ]
 
 
@@ -940,12 +925,11 @@ def render_page() -> str:
     sections = [
         SECTION_HERO,
         render_open_science(),
-        SECTION_TOKEN,
-        SECTION_SCORING,
-        SECTION_SARIF_TECHNIQUES,
-        f"""
+        # New supplemental-analysis order (per user spec):
+        SECTION_SCORING,                                # 1
+        f"""                                            <!-- 2 -->
 <section id="cp-details">
-<h2><span class="appendix-tag">Appendix F</span>Challenge Project (CP) Details<a class="anchor-link" href="#cp-details">¶</a></h2>
+<h2>Challenge Project (CP) Details<a class="anchor-link" href="#cp-details">¶</a></h2>
 
 <p>
 The table lists every Challenge Project (CP) shipped in the AIxCC final round,
@@ -956,9 +940,9 @@ and harness corpus size.
 {cp_table}
 </section>
 """,
-        f"""
+        f"""                                            <!-- 3 -->
 <section id="cpv-details">
-<h2><span class="appendix-tag">Appendix G</span>Challenge Project Vulnerability (CPV) Details<a class="anchor-link" href="#cpv-details">¶</a></h2>
+<h2>Challenge Project Vulnerability (CPV) Details<a class="anchor-link" href="#cpv-details">¶</a></h2>
 
 <p>
 Detailed information about each Challenge Project Vulnerability (CPV) in the AIxCC final round.
@@ -967,20 +951,11 @@ Detailed information about each Challenge Project Vulnerability (CPV) in the AIx
 {cpv_table}
 </section>
 """,
-        f"""
-<section id="zeroday-details">
-<h2><span class="appendix-tag">Appendix H</span>0-Day Details<a class="anchor-link" href="#zeroday-details">¶</a></h2>
-
-<p>
-Detailed information about 0-day vulnerabilities discovered during the competition.
-</p>
-
-{zd_table}
-</section>
-""",
-        f"""
+        SECTION_SARIF_TECHNIQUES,                       # 4
+        SECTION_TOKEN,                                  # 5
+        f"""                                            <!-- 6 -->
 <section id="sarif-broadcasts">
-<h2><span class="appendix-tag">Appendix I</span>SARIF Broadcast Details<a class="anchor-link" href="#sarif-broadcasts">¶</a></h2>
+<h2>SARIF Broadcast Details<a class="anchor-link" href="#sarif-broadcasts">¶</a></h2>
 
 <p>
 Detailed information about each SARIF broadcast in the AIxCC final round.
@@ -989,8 +964,19 @@ Detailed information about each SARIF broadcast in the AIxCC final round.
 {sarif_table}
 </section>
 """,
-        SECTION_SUBMISSION_TIMING,
-        SECTION_CWE_HEATMAPS,
+        f"""                                            <!-- 7 -->
+<section id="zeroday-details">
+<h2>0-Day Details<a class="anchor-link" href="#zeroday-details">¶</a></h2>
+
+<p>
+Detailed information about 0-day vulnerabilities discovered during the competition.
+</p>
+
+{zd_table}
+</section>
+""",
+        SECTION_SUBMISSION_TIMING,                      # 8 (last two unchanged)
+        SECTION_CWE_HEATMAPS,                           # 9
     ]
 
     body = "\n".join(sections)
@@ -1002,7 +988,7 @@ Detailed information about each SARIF broadcast in the AIxCC final round.
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AIxCC SoK — Companion Site</title>
-<meta name="description" content="Extended appendices and open-science material for the AIxCC SoK paper.">
+<meta name="description" content="Companion site for the AIxCC SoK study — references, artifacts, supplemental analysis, and the finalist teams' public materials.">
 <link rel="stylesheet" href="css/style.css?v={css_ver}">  <!-- v={css_ver} -->
 <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
 <script>
@@ -1018,7 +1004,6 @@ window.MathJax = {{
 <div class="layout">
   <aside class="sidebar" id="toc">
     <h1><a href="#top">AIxCC SoK<br><span style="font-weight:500">Companion Site</span></a></h1>
-    <p class="subtitle">Extended appendices · open-science index</p>
     {nav}
   </aside>
   <div class="toc-backdrop" aria-hidden="true"></div>
