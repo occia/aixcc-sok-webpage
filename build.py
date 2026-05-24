@@ -745,15 +745,17 @@ TEAMS = [
              "https://github.com/Team-Atlanta/aixcc-afc-atlantis"),
             ("ATLANTIS: AI-driven Threat Localization, Analysis, and Triage Intelligence System (arXiv 2509.14589)",
              "https://arxiv.org/abs/2509.14589"),
-            ("PatchIsland: Orchestration of LLM Agents for Continuous Vulnerability Repair (arXiv 2601.17471)",
-             "https://arxiv.org/abs/2601.17471"),
+            ("Team Atlanta blog — technical write-ups on ATLANTIS internals",
+             "https://team-atlanta.github.io/blog/"),
         ],
     },
     {
         "key": "TB", "name": "Buttercup", "org": "Trail of Bits",
         "rank": "2nd",
         "links": [
-            ("CRS source code (GitHub: trailofbits/buttercup)",
+            ("CRS source code — AFC submission (GitHub: trailofbits/afc-buttercup)",
+             "https://github.com/trailofbits/afc-buttercup"),
+            ("CRS source code — continued development (GitHub: trailofbits/buttercup)",
              "https://github.com/trailofbits/buttercup"),
             ("Trail of Bits blog: AIxCC posts (tag)",
              "https://blog.trailofbits.com/categories/aixcc/"),
@@ -763,6 +765,8 @@ TEAMS = [
         "key": "TI", "name": "RoboDuck", "org": "Theori",
         "rank": "3rd",
         "links": [
+            ("CRS source code (GitHub: theori-io/aixcc-afc-archive)",
+             "https://github.com/theori-io/aixcc-afc-archive"),
             ("Theori AIxCC public materials (theori-io.github.io/aixcc-public)",
              "https://theori-io.github.io/aixcc-public/"),
             ("Branch Flipper: Unlocking Fuzz Blockers with Coverage-Grounded LLMs",
@@ -772,22 +776,37 @@ TEAMS = [
     {
         "key": "FB", "name": "FuzzingBrain", "org": "FuzzingBrain",
         "rank": "4th",
-        "links": [],
+        "links": [
+            ("CRS source code (GitHub: fuzzingbrain/afc-crs-all-you-need-is-a-fuzzing-brain)",
+             "https://github.com/fuzzingbrain/afc-crs-all-you-need-is-a-fuzzing-brain"),
+            ("FuzzingBrain project page",
+             "https://fuzzingbrain.github.io/"),
+            ("All You Need Is a Fuzzing Brain (CRS whitepaper, arXiv 2509.07225)",
+             "https://arxiv.org/abs/2509.07225"),
+            ("FuzzingBrain v2 — post-competition whitepaper (arXiv 2605.21779)",
+             "https://arxiv.org/abs/2605.21779"),
+        ],
     },
     {
         "key": "SP", "name": "Artiphishell", "org": "Shellphish",
         "rank": "5th",
         "links": [
+            ("CRS source code (GitHub: shellphish/artiphishell)",
+             "https://github.com/shellphish/artiphishell"),
             ("Shellphish × AIxCC Post-Mortem",
              "https://support.shellphish.net/blog/2025/08/22/shellphish-x-aixcc-pm/"),
-            ("CRS source code (GitHub: shellphish-support-syndicate/artiphishell-public)",
-             "https://github.com/shellphish-support-syndicate/artiphishell-public"),
         ],
     },
     {
         "key": "42", "name": "BugBuster", "org": "42-b3yond-6ug",
         "rank": "6th",
         "links": [
+            ("CRS source code (GitHub: 42-b3yond-6ug/42-b3yond-6ug-crs)",
+             "https://github.com/42-b3yond-6ug/42-b3yond-6ug-crs"),
+            ("42-b3yond-6ug blog (b3yond.org/crs)",
+             "https://b3yond.org/crs"),
+            ("Two-year AIxCC recap by lkmidas",
+             "https://lkmidas.github.io/posts/20250808-aixcc-recap/"),
             ("42-b3yond-6ug Open Letter (Google Doc)",
              "https://docs.google.com/document/d/1-1TexnOwQGj2KJ8rrLtk-Vgl-PqO5MZe7k0qrHQPC_0/"),
         ],
@@ -795,7 +814,10 @@ TEAMS = [
     {
         "key": "LC", "name": "Lacrosse", "org": "Lacrosse",
         "rank": "7th",
-        "links": [],
+        "links": [
+            ("CRS source code (GitHub: siftech/afc-crs-lacrosse)",
+             "https://github.com/siftech/afc-crs-lacrosse"),
+        ],
     },
 ]
 
@@ -834,8 +856,8 @@ Some materials respect DARPA's official release timeline and are not yet public.
 <ul>
   <li>Questionnaires, meeting notes, sanitized experiment data (PF / MR / CC), and analysis scripts —
       Zenodo bundle at <a href="https://zenodo.org/records/20367274">zenodo.org/records/20367274</a>.</li>
-  <li>Official challenge sets &amp; harnesses, released by the organizers as
-      <em>CRSBench</em> — <a href="https://oss-crs.openssf.org/crsbench">oss-crs.openssf.org/crsbench</a>.</li>
+  <li>AIxCC Final Challenge Set, released as part of <em>CRSBench</em> —
+      <a href="https://oss-crs.openssf.org/crsbench">oss-crs.openssf.org/crsbench</a>.</li>
 </ul>
 
 <h3>Pending release</h3>
