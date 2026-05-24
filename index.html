@@ -29,9 +29,9 @@ window.MathJax = {
 <li><a href="#cp-details">Challenge Project (CP) Details</a></li>
 <li><a href="#cpv-details">Challenge Project Vulnerability (CPV) Details</a></li>
 <li><a href="#sarif-techniques">SARIF Validation Techniques</a></li>
-<li><a href="#token-consumption">Token Consumption</a></li>
 <li><a href="#sarif-broadcasts">SARIF Broadcast Details</a></li>
 <li><a href="#zeroday-details">0-Day Details</a></li>
+<li><a href="#token-consumption">Token Consumption</a></li>
 <li><a href="#submission-timing">Submission Timing</a></li>
 <li><a href="#cwe-analysis">CWE-Wise Performance</a></li>
 </ol></nav>
@@ -83,7 +83,7 @@ Some materials respect DARPA's official release timeline and are not yet public.
 
 <div class="team-list">
 <div class="team-entry">  <h4 class="team-name">    <code>AT</code>     <span class="team-name-text">Atlantis</span>     <span class="team-org">— Team Atlanta</span>  </h4>  <ul class="team-links"><li><a href="https://github.com/Team-Atlanta/aixcc-afc-atlantis">CRS source code (GitHub: Team-Atlanta/aixcc-afc-atlantis)</a></li><li><a href="https://arxiv.org/abs/2509.14589">ATLANTIS: AI-driven Threat Localization, Analysis, and Triage Intelligence System (arXiv 2509.14589)</a></li><li><a href="https://team-atlanta.github.io/blog/">Team Atlanta blog — technical write-ups on ATLANTIS internals</a></li></ul></div>
-<div class="team-entry">  <h4 class="team-name">    <code>TB</code>     <span class="team-name-text">Buttercup</span>     <span class="team-org">— Trail of Bits</span>  </h4>  <ul class="team-links"><li><a href="https://github.com/trailofbits/afc-buttercup">CRS source code — AFC submission (GitHub: trailofbits/afc-buttercup)</a></li><li><a href="https://github.com/trailofbits/buttercup">CRS source code — continued development (GitHub: trailofbits/buttercup)</a></li><li><a href="https://blog.trailofbits.com/categories/aixcc/">Trail of Bits blog: AIxCC posts (tag)</a></li></ul></div>
+<div class="team-entry">  <h4 class="team-name">    <code>TB</code>     <span class="team-name-text">Buttercup</span>     <span class="team-org">— Trail of Bits</span>  </h4>  <ul class="team-links"><li><a href="https://github.com/trailofbits/afc-buttercup">CRS source code — AFC submission (GitHub: trailofbits/afc-buttercup)</a></li><li><a href="https://github.com/trailofbits/buttercup">CRS source code — continued development (GitHub: trailofbits/buttercup)</a></li><li><a href="https://blog.trailofbits.com/categories/aixcc/">Trail of Bits blog: AIxCC posts</a></li></ul></div>
 <div class="team-entry">  <h4 class="team-name">    <code>TI</code>     <span class="team-name-text">RoboDuck</span>     <span class="team-org">— Theori</span>  </h4>  <ul class="team-links"><li><a href="https://github.com/theori-io/aixcc-afc-archive">CRS source code (GitHub: theori-io/aixcc-afc-archive)</a></li><li><a href="https://theori-io.github.io/aixcc-public/">Theori AIxCC public materials (theori-io.github.io/aixcc-public)</a></li><li><a href="https://theori-io.github.io/aixcc-public/afc/Branch%20Flipper.pdf">Branch Flipper: Unlocking Fuzz Blockers with Coverage-Grounded LLMs</a></li></ul></div>
 <div class="team-entry">  <h4 class="team-name">    <code>FB</code>     <span class="team-name-text">FuzzingBrain</span>     <span class="team-org">— FuzzingBrain</span>  </h4>  <ul class="team-links"><li><a href="https://github.com/fuzzingbrain/afc-crs-all-you-need-is-a-fuzzing-brain">CRS source code (GitHub: fuzzingbrain/afc-crs-all-you-need-is-a-fuzzing-brain)</a></li><li><a href="https://fuzzingbrain.github.io/">FuzzingBrain project page</a></li><li><a href="https://arxiv.org/abs/2509.07225">All You Need Is a Fuzzing Brain (CRS whitepaper, arXiv 2509.07225)</a></li><li><a href="https://arxiv.org/abs/2605.21779">FuzzingBrain v2 — post-competition whitepaper (arXiv 2605.21779)</a></li></ul></div>
 <div class="team-entry">  <h4 class="team-name">    <code>SP</code>     <span class="team-name-text">Artiphishell</span>     <span class="team-org">— Shellphish</span>  </h4>  <ul class="team-links"><li><a href="https://github.com/shellphish/artiphishell">CRS source code (GitHub: shellphish/artiphishell)</a></li><li><a href="https://support.shellphish.net/blog/2025/08/22/shellphish-x-aixcc-pm/">Shellphish × AIxCC Post-Mortem</a></li></ul></div>
@@ -157,13 +157,13 @@ and not penalize partially correct or duplicate submissions that provide real-wo
   <li><strong>PoV.</strong> One reproducible PoV per vulnerability is accurate; irreproducible PoVs are inaccurate; reproducible but duplicate PoVs are neutral, since collecting diverse PoVs can benefit patch validation in practice.</li>
   <li><strong>Patch.</strong> First, patches that fail to apply, build, or remediate any PoV are inaccurate. Then, the patches that fail functionality tests are neutral. This considers that CRSs may not have access to full testing functionality in practice and a CI system can help catch such issues. Finally, among passing patches, a minimal covering set is selected as accurate while the rest are inaccurate.</li>
   <li><strong>SARIF and Bundle.</strong> Only fully correct submissions are accurate; others are inaccurate.</li>
-  <li><strong>Server errors and schema mismatches.</strong> Neutral.</li>
+  <li><strong>Server errors and schema mismatches.</strong> neutral.</li>
 </ul>
 
 <h3>Time-Decayed Scoring Design</h3>
 <p>
 Teams' submissions earn fewer points over time, with up to 50% reduction at the deadline.
-\(S_{\text{PoV}}\), \(S_{\text{Patch}}\), and \(S_{\text{SARIF}}\) share a common time-decay formula:
+\(\mathit{Score}_{\text{PoV}}\), \(\mathit{Score}_{\text{Patch}}\), and \(\mathit{Score}_{\text{SARIF}}\) share a common time-decay formula:
 </p>
 \[
 \mathit{Score} \;=\; \mathit{weight} \times \tau, \qquad
@@ -227,9 +227,7 @@ This cross-team validation also reflects one collaboration approach among CRSs i
 <h2>Challenge Project (CP) Details<a class="anchor-link" href="#cp-details">¶</a></h2>
 
 <p>
-The table lists every Challenge Project (CP) shipped in the AIxCC final round,
-including upstream commit, lines/files of delta (for delta-mode CPs), build time,
-and harness corpus size.
+Detailed information about each Challenge Project (CP) in the AIxCC final round.
 </p>
 
 <div class="table-wrap"><table class="data">
@@ -564,7 +562,7 @@ and harness corpus size.
 <td><a href="https://github.com/ntop/nDPI">ndpi</a></td>
 <td>Network</td>
 <td class='num'>55</td>
-<td class='compact'><code>ndpi1□</code></td>
+<td class='compact'><code>nd1□</code></td>
 <td class='num'>0</td>
 <td>—</td>
 <td class='num'>136K</td>
@@ -580,7 +578,7 @@ and harness corpus size.
 <td><a href="https://github.com/openssl/openssl">openssl</a></td>
 <td>Crypto</td>
 <td class='num'>30</td>
-<td class='compact'><code>openssl_analysis_raw</code></td>
+<td class='compact'><code>os1□</code></td>
 <td class='num'>0</td>
 <td>—</td>
 <td class='num'>909K</td>
@@ -596,7 +594,7 @@ and harness corpus size.
 <td><a href="https://github.com/shadowsocks/shadowsocks-libev">shadowsocks</a></td>
 <td>Network</td>
 <td class='num'>1</td>
-<td class='compact'><code>shadowsocks1□</code></td>
+<td class='compact'><code>ss1□</code></td>
 <td class='num'>5</td>
 <td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/126.html" title="Buffer Over-read">CWE-126</a></td>
 <td class='num'>19K</td>
@@ -612,7 +610,7 @@ and harness corpus size.
 <td><a href="https://github.com/systemd/systemd">systemd</a></td>
 <td>System</td>
 <td class='num'>47</td>
-<td class='compact'><code>systemd1□</code></td>
+<td class='compact'><code>sd1□</code></td>
 <td class='num'>4</td>
 <td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/122.html" title="Heap-based Buffer Overflow">CWE-122</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/415.html" title="Double Free">CWE-415</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/787.html" title="Out-of-bounds Write">CWE-787</a></td>
 <td class='num'>740K</td>
@@ -836,7 +834,7 @@ and harness corpus size.
 <td><a href="https://github.com/dcm4che/dcm4che">dcm4che</a></td>
 <td>Healthcare</td>
 <td class='num'>1</td>
-<td class='compact'><code>dcm4che-full-01</code></td>
+<td class='compact'><code>dc1□</code></td>
 <td class='num'>0</td>
 <td>—</td>
 <td class='num'>105K</td>
@@ -852,7 +850,7 @@ and harness corpus size.
 <td><a href="https://github.com/dicoogle/dicoogle">dicoogle</a></td>
 <td>Healthcare</td>
 <td class='num'>1</td>
-<td class='compact'><code>dicoogle1□</code></td>
+<td class='compact'><code>dg1□</code></td>
 <td class='num'>0</td>
 <td>—</td>
 <td class='num'>21K</td>
@@ -868,7 +866,7 @@ and harness corpus size.
 <td><a href="https://github.com/GoogleCloudPlatform/healthcare-data-harmonization">healthcare-data-harmonization</a></td>
 <td>Healthcare</td>
 <td class='num'>1</td>
-<td class='compact'><code>hcdh1□</code></td>
+<td class='compact'><code>hc1□</code></td>
 <td class='num'>0</td>
 <td>—</td>
 <td class='num'>53K</td>
@@ -884,7 +882,7 @@ and harness corpus size.
 <td><a href="https://github.com/apache/hertzbeat">hertzbeat</a></td>
 <td>Monitoring</td>
 <td class='num'>1</td>
-<td class='compact'><code>hertzbeat1□</code></td>
+<td class='compact'><code>hb1□</code></td>
 <td class='num'>0</td>
 <td>—</td>
 <td class='num'>78K</td>
@@ -900,7 +898,7 @@ and harness corpus size.
 <td><a href="https://github.com/jhy/jsoup">jsoup</a></td>
 <td>Document</td>
 <td class='num'>2</td>
-<td class='compact'><code>jsoup1□</code></td>
+<td class='compact'><code>js1□</code></td>
 <td class='num'>0</td>
 <td>—</td>
 <td class='num'>36K</td>
@@ -916,7 +914,7 @@ and harness corpus size.
 <td><a href="https://github.com/apache/logging-log4j2">log4j2</a></td>
 <td>Logging</td>
 <td class='num'>1</td>
-<td class='compact'><code>log4j2-delta-01</code></td>
+<td class='compact'><code>lj1▲</code></td>
 <td class='num'>1</td>
 <td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/20.html" title="Improper Input Validation">CWE-20</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/917.html" title="Improper Neutralization of Special Elements used in an Expression Language Statement (&#x27;Expression Language Injection&#x27;)">CWE-917</a></td>
 <td class='num'>54K</td>
@@ -932,7 +930,7 @@ and harness corpus size.
 <td><a href="https://github.com/apache/pdfbox">pdfbox</a></td>
 <td>Document</td>
 <td class='num'>6</td>
-<td class='compact'><code>pdfbox1▲</code></td>
+<td class='compact'><code>pb1▲</code></td>
 <td class='num'>1</td>
 <td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/28.html" title="Path Traversal: &#x27;..filedir&#x27;">CWE-28</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/77.html" title="Improper Neutralization of Special Elements used in a Command (&#x27;Command Injection&#x27;)">CWE-77</a></td>
 <td class='num'>167K</td>
@@ -948,7 +946,7 @@ and harness corpus size.
 <td><a href="https://github.com/apache/pdfbox">pdfbox</a></td>
 <td>Document</td>
 <td class='num'>6</td>
-<td class='compact'><code>pdfbox1□</code></td>
+<td class='compact'><code>pb1□</code></td>
 <td class='num'>8</td>
 <td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/611.html" title="Improper Restriction of XML External Entity Reference">CWE-611</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/789.html" title="Memory Allocation with Excessive Size Value">CWE-789</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/834.html" title="Excessive Iteration">CWE-834</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/835.html" title="Loop with Unreachable Exit Condition (&#x27;Infinite Loop&#x27;)">CWE-835</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/918.html" title="Server-Side Request Forgery (SSRF)">CWE-918</a></td>
 <td class='num'>167K</td>
@@ -964,7 +962,7 @@ and harness corpus size.
 <td><a href="https://github.com/apache/poi">poi</a></td>
 <td>Document</td>
 <td class='num'>17</td>
-<td class='compact'><code>poi1▲</code></td>
+<td class='compact'><code>po1▲</code></td>
 <td class='num'>2</td>
 <td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/20.html" title="Improper Input Validation">CWE-20</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/121.html" title="Stack-based Buffer Overflow">CWE-121</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/918.html" title="Server-Side Request Forgery (SSRF)">CWE-918</a></td>
 <td class='num'>433K</td>
@@ -980,7 +978,7 @@ and harness corpus size.
 <td><a href="https://github.com/apache/poi">poi</a></td>
 <td>Document</td>
 <td class='num'>17</td>
-<td class='compact'><code>poi1□</code></td>
+<td class='compact'><code>po1□</code></td>
 <td class='num'>5</td>
 <td><a class="cwe-link" href="https://cwe.mitre.org/data/definitions/20.html" title="Improper Input Validation">CWE-20</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/35.html" title="Path Traversal: &#x27;.../...//&#x27;">CWE-35</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/382.html" title="J2EE Bad Practices: Use of System.exit()">CWE-382</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/695.html" title="Use of Low-Level Functionality">CWE-695</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/770.html" title="Allocation of Resources Without Limits or Throttling">CWE-770</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/789.html" title="Memory Allocation with Excessive Size Value">CWE-789</a>, <a class="cwe-link" href="https://cwe.mitre.org/data/definitions/834.html" title="Excessive Iteration">CWE-834</a></td>
 <td class='num'>433K</td>
@@ -1773,31 +1771,7 @@ Detailed information about each Challenge Project Vulnerability (CPV) in the AIx
 </p>
 </section>
 
-
-<section id="token-consumption">
-<h2>Token Consumption Details<a class="anchor-link" href="#token-consumption">¶</a></h2>
-
-<p>
-The figures below show the per-model token consumption and the input-to-output token ratio per model.
-Token data is derived from OpenTelemetry (OTEL) logs collected by the organizers.
-As the collected data was incomplete due to the competition environment,
-the figures do not present full usage but serve as a lower-bound reference.
-</p>
-
-<div class="figure">
-  <img src="assets/figures/model_usage_by_team.png" alt="Per-model token consumption by team">
-  <p class="figure-caption"><span class="caption-label">Figure C1.</span>
-  Token consumption (input + output) per model by team.</p>
-</div>
-
-<div class="figure">
-  <img src="assets/figures/io_token_ratio_by_model_team.png" alt="Input-to-output token ratio per model by team">
-  <p class="figure-caption"><span class="caption-label">Figure C2.</span>
-  I/O token ratio per model by team.</p>
-</div>
-</section>
-
-                                            <!-- 6 -->
+                                            <!-- 5 -->
 <section id="sarif-broadcasts">
 <h2>SARIF Broadcast Details<a class="anchor-link" href="#sarif-broadcasts">¶</a></h2>
 
@@ -1904,7 +1878,7 @@ Detailed information about each SARIF broadcast in the AIxCC final round.
 <p class="footnotes"><span class="mode-mark delta">▲</span> delta-mode &nbsp; <span class="mode-mark full">□</span> full-mode &nbsp; <span class="mode-mark zd">⊝</span> false-positive broadcast (no underlying CPV).</p>
 </section>
 
-                                            <!-- 7 -->
+                                            <!-- 6 -->
 <section id="zeroday-details">
 <h2>0-Day Details<a class="anchor-link" href="#zeroday-details">¶</a></h2>
 
@@ -2093,6 +2067,30 @@ Detailed information about 0-day vulnerabilities discovered during the competiti
 </tr>
 </tbody></table></div>
 <p class="footnotes"><span class="mode-mark delta">▲</span> delta-mode &nbsp; <span class="mode-mark full">□</span> full-mode.</p>
+</section>
+
+
+<section id="token-consumption">
+<h2>Token Consumption Details<a class="anchor-link" href="#token-consumption">¶</a></h2>
+
+<p>
+The figures below show the per-model token consumption and the input-to-output token ratio per model.
+Token data is derived from OpenTelemetry (OTEL) logs collected by the organizers.
+As the collected data was incomplete due to the competition environment,
+the figures do not present full usage but serve as a lower-bound reference.
+</p>
+
+<div class="figure">
+  <img src="assets/figures/model_usage_by_team.png" alt="Per-model token consumption by team">
+  <p class="figure-caption"><span class="caption-label">Figure C1.</span>
+  Token consumption (input + output) per model by team.</p>
+</div>
+
+<div class="figure">
+  <img src="assets/figures/io_token_ratio_by_model_team.png" alt="Input-to-output token ratio per model by team">
+  <p class="figure-caption"><span class="caption-label">Figure C2.</span>
+  I/O token ratio per model by team.</p>
+</div>
 </section>
 
 

@@ -107,6 +107,21 @@ PROJECT_DISPLAY = {
     "healthcare-data-harmonization": "healthcare-data-harmonization",
 }
 
+# Project → two-letter abbreviation. Sourced from the paper's
+# tbl/cp_details/overview_table.tex (Abbr. column of t:cp-overview).
+# This is the authoritative mapping for the CP-naming convention
+# `<abbr><idx><mode>` (e.g. cu2▲, os1□, lj1▲).
+PROJECT_ABBR = {
+    "curl": "cu", "dav1d": "da", "freerdp": "fp", "little-cms": "cm",
+    "libavif": "av", "libexif": "ex", "libxml2": "lx", "mongoose": "mg",
+    "ndpi": "nd", "openssl": "os", "shadowsocks": "ss",
+    "shadowsocks-libev": "ss", "systemd": "sd", "wireshark": "ws", "xz": "xz",
+    "commons-compress": "cc", "dcm4che": "dc", "dicoogle": "dg",
+    "healthcare-data-harmonization": "hc", "hertzbeat": "hb",
+    "jsoup": "js", "log4j2": "lj", "logging-log4j2": "lj",
+    "pdfbox": "pb", "poi": "po", "tika": "tk",
+}
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -241,16 +256,19 @@ def render_cp_table(rows: list[dict]) -> str:
     ]
 
     def fmt_chal(r: dict) -> str:
-        """Render the CP id like cu2▲ / cm1□ from challenge + task_type."""
-        chal = r["challenge"]  # e.g. cu-delta-02 → cu2▲, cm-full-01 → cm1□
-        m = re.match(r"([a-zA-Z]+)-?(delta|full)-?(\d+)", chal)
-        if m:
-            prefix, mode, idx = m.group(1), m.group(2), m.group(3)
-            mark = "▲" if mode == "delta" else "□"
-            # convention used in paper: cu2 (drop leading zero)
-            short_idx = str(int(idx))
-            return f"{prefix}{short_idx}{mark}"
-        return chal
+        """Render the CP id like cu2▲ / cm1□ / os1□ / lj1▲.
+
+        Uses the paper's two-letter project abbreviation (PROJECT_ABBR) for
+        the prefix and extracts the trailing integer of the challenge name
+        for the index. Falls back to index 1 when the challenge name has no
+        trailing digit (e.g. `openssl_analysis_raw` → `os1□`).
+        Mode marker comes from the CSV `task_type` column.
+        """
+        abbr = PROJECT_ABBR.get(r["project"], r["project"])
+        m = re.search(r"(\d+)\s*$", r["challenge"])
+        idx = str(int(m.group(1))) if m else "1"
+        mark = "▲" if r.get("task_type") == "DELTA" else "□"
+        return f"{abbr}{idx}{mark}"
 
     def commit_link(r: dict) -> str:
         c = r["commit"]
@@ -498,13 +516,13 @@ and not penalize partially correct or duplicate submissions that provide real-wo
   <li><strong>PoV.</strong> One reproducible PoV per vulnerability is accurate; irreproducible PoVs are inaccurate; reproducible but duplicate PoVs are neutral, since collecting diverse PoVs can benefit patch validation in practice.</li>
   <li><strong>Patch.</strong> First, patches that fail to apply, build, or remediate any PoV are inaccurate. Then, the patches that fail functionality tests are neutral. This considers that CRSs may not have access to full testing functionality in practice and a CI system can help catch such issues. Finally, among passing patches, a minimal covering set is selected as accurate while the rest are inaccurate.</li>
   <li><strong>SARIF and Bundle.</strong> Only fully correct submissions are accurate; others are inaccurate.</li>
-  <li><strong>Server errors and schema mismatches.</strong> Neutral.</li>
+  <li><strong>Server errors and schema mismatches.</strong> neutral.</li>
 </ul>
 
 <h3>Time-Decayed Scoring Design</h3>
 <p>
 Teams' submissions earn fewer points over time, with up to 50% reduction at the deadline.
-\(S_{\text{PoV}}\), \(S_{\text{Patch}}\), and \(S_{\text{SARIF}}\) share a common time-decay formula:
+\(\mathit{Score}_{\text{PoV}}\), \(\mathit{Score}_{\text{Patch}}\), and \(\mathit{Score}_{\text{SARIF}}\) share a common time-decay formula:
 </p>
 \[
 \mathit{Score} \;=\; \mathit{weight} \times \tau, \qquad
@@ -757,7 +775,7 @@ TEAMS = [
              "https://github.com/trailofbits/afc-buttercup"),
             ("CRS source code — continued development (GitHub: trailofbits/buttercup)",
              "https://github.com/trailofbits/buttercup"),
-            ("Trail of Bits blog: AIxCC posts (tag)",
+            ("Trail of Bits blog: AIxCC posts",
              "https://blog.trailofbits.com/categories/aixcc/"),
         ],
     },
@@ -889,9 +907,9 @@ NAV_ITEMS = [
     ("link", "Challenge Project (CP) Details", "#cp-details"),
     ("link", "Challenge Project Vulnerability (CPV) Details", "#cpv-details"),
     ("link", "SARIF Validation Techniques", "#sarif-techniques"),
-    ("link", "Token Consumption", "#token-consumption"),
     ("link", "SARIF Broadcast Details", "#sarif-broadcasts"),
     ("link", "0-Day Details", "#zeroday-details"),
+    ("link", "Token Consumption", "#token-consumption"),
     ("link", "Submission Timing", "#submission-timing"),
     ("link", "CWE-Wise Performance", "#cwe-analysis"),
 ]
@@ -954,9 +972,7 @@ def render_page() -> str:
 <h2>Challenge Project (CP) Details<a class="anchor-link" href="#cp-details">¶</a></h2>
 
 <p>
-The table lists every Challenge Project (CP) shipped in the AIxCC final round,
-including upstream commit, lines/files of delta (for delta-mode CPs), build time,
-and harness corpus size.
+Detailed information about each Challenge Project (CP) in the AIxCC final round.
 </p>
 
 {cp_table}
@@ -974,8 +990,7 @@ Detailed information about each Challenge Project Vulnerability (CPV) in the AIx
 </section>
 """,
         SECTION_SARIF_TECHNIQUES,                       # 4
-        SECTION_TOKEN,                                  # 5
-        f"""                                            <!-- 6 -->
+        f"""                                            <!-- 5 -->
 <section id="sarif-broadcasts">
 <h2>SARIF Broadcast Details<a class="anchor-link" href="#sarif-broadcasts">¶</a></h2>
 
@@ -986,7 +1001,7 @@ Detailed information about each SARIF broadcast in the AIxCC final round.
 {sarif_table}
 </section>
 """,
-        f"""                                            <!-- 7 -->
+        f"""                                            <!-- 6 -->
 <section id="zeroday-details">
 <h2>0-Day Details<a class="anchor-link" href="#zeroday-details">¶</a></h2>
 
@@ -997,7 +1012,8 @@ Detailed information about 0-day vulnerabilities discovered during the competiti
 {zd_table}
 </section>
 """,
-        SECTION_SUBMISSION_TIMING,                      # 8 (last two unchanged)
+        SECTION_TOKEN,                                  # 7
+        SECTION_SUBMISSION_TIMING,                      # 8
         SECTION_CWE_HEATMAPS,                           # 9
     ]
 
