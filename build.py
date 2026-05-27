@@ -777,6 +777,8 @@ TEAMS = [
              "https://github.com/trailofbits/buttercup"),
             ("Trail of Bits blog: AIxCC posts",
              "https://blog.trailofbits.com/categories/aixcc/"),
+            ("DEF CON stage talk (slides PDF)",
+             "https://www.trailofbits.com/documents/DEFCON_AIxCC_Stage_Talk.pdf"),
         ],
     },
     {
@@ -789,6 +791,8 @@ TEAMS = [
              "https://theori-io.github.io/aixcc-public/"),
             ("Branch Flipper: Unlocking Fuzz Blockers with Coverage-Grounded LLMs",
              "https://theori-io.github.io/aixcc-public/afc/Branch%20Flipper.pdf"),
+            ("Theori company blog — AIxCC category",
+             "https://theori.io/blog/category/aixcc"),
         ],
     },
     {
@@ -1028,7 +1032,6 @@ Detailed information about 0-day vulnerabilities discovered during the competiti
 <title>AIxCC SoK — Companion Site</title>
 <meta name="description" content="Companion site for the AIxCC SoK study — references, artifacts, supplemental analysis, and the finalist teams' public materials.">
 <link rel="stylesheet" href="css/style.css?v={css_ver}">  <!-- v={css_ver} -->
-<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
 <script>
 window.MathJax = {{
   tex: {{ inlineMath: [['\\\\(', '\\\\)']], displayMath: [['\\\\[', '\\\\]']] }},
@@ -1036,7 +1039,7 @@ window.MathJax = {{
   startup: {{ typeset: true }}
 }};
 </script>
-<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script async src="assets/mathjax/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="layout">
