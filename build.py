@@ -742,6 +742,7 @@ SECTION_HERO = """
   <p class="meta">
     <a href="#open-science">SoK Artifact</a>
     <a href="#team-materials">Teams' Public References</a>
+    <a href="#oss-crs-crsbench">OSS-CRS &amp; CRSBench</a>
     <a href="#scoring">Supplemental Analysis</a>
     <a href="https://arxiv.org/abs/2602.07666">Arxiv Paper</a>
   </p>
@@ -896,6 +897,33 @@ Some materials respect DARPA's official release timeline and are not yet public.
 {cards_html}
 </div>
 </section>
+
+<section id="oss-crs-crsbench">
+<h2><span class="appendix-tag">Open Science</span>OSS-CRS &amp; CRSBench<a class="anchor-link" href="#oss-crs-crsbench">¶</a></h2>
+
+<h3>OSS-CRS</h3>
+<p>
+OpenSSF CRS orchestration platform which integrates the bug-finding and
+patch components from every AIxCC finalist CRS into a single open-source
+pipeline.
+</p>
+<ul>
+  <li>Official website: <a href="https://oss-crs.openssf.org/">oss-crs.openssf.org</a></li>
+  <li>GitHub: <a href="https://github.com/ossf/oss-crs">ossf/oss-crs</a></li>
+</ul>
+
+<h3>CRSBench</h3>
+<p>
+The matching benchmark suite for OSS-CRS, bundling the AIxCC Final
+Challenge Set, the AIxCC Exhibition Round challenge set, and Team
+Atlanta's n-day-derived challenges.
+</p>
+<ul>
+  <li>Official website: <a href="https://oss-crs.openssf.org/crsbench">oss-crs.openssf.org/crsbench</a></li>
+  <li>GitHub: <a href="https://github.com/sslab-gatech/CRSBench">sslab-gatech/CRSBench</a></li>
+  <li>HuggingFace dataset: <a href="https://huggingface.co/datasets/sslab-gatech/crsbench-dataset">sslab-gatech/crsbench-dataset</a></li>
+</ul>
+</section>
 """
 
 
@@ -906,6 +934,7 @@ NAV_ITEMS = [
     ("nav-label", "Open Science", []),
     ("link", "SoK Artifact", "#open-science"),
     ("link", "Collection of Teams' Public References", "#team-materials"),
+    ("link", "OSS-CRS & CRSBench", "#oss-crs-crsbench"),
     ("nav-label", "Supplemental Analysis", []),
     ("link", "Scoring Rules Explanation", "#scoring"),
     ("link", "Challenge Project (CP) Details", "#cp-details"),
