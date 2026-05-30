@@ -1068,7 +1068,7 @@ window.MathJax = {{
   startup: {{ typeset: true }}
 }};
 </script>
-<script async src="assets/mathjax/tex-mml-chtml.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="layout">
