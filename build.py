@@ -740,11 +740,13 @@ SECTION_HERO = """
     supplemental analysis, and the participating teams' public materials.
   </p>
   <p class="meta">
+    <a href="https://www.usenix.org/system/files/usenixsecurity26-zhang-cen.pdf">Paper</a>
+    <a class="pending" href="https://www.usenix.org/conference/usenixsecurity26/presentation/zhang-cen">Slides &amp; Video (coming soon)</a>
+    <a href="assets/materials/aixcc-sok-poster.pdf">Poster</a>
     <a href="#open-science">SoK Artifact</a>
     <a href="#team-materials">Teams' Public References</a>
     <a href="#oss-crs-crsbench">OSS-CRS &amp; CRSBench</a>
     <a href="#scoring">Supplemental Analysis</a>
-    <a href="https://arxiv.org/abs/2602.07666">Arxiv Paper</a>
   </p>
 </header>
 """

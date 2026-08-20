@@ -29,6 +29,8 @@ site/
 ├── build.py                # regenerates index.html from the paper's CSVs
 ├── css/style.css           # all styling
 ├── js/main.js              # ~50 lines: scroll-spy + mobile TOC drawer
+├── assets/materials/       # paper presentation materials hosted by the site
+│   └── aixcc-sok-poster.pdf
 ├── assets/figures/         # PNG + SVG copies of paper figures
 │   ├── model_usage_by_team.png
 │   ├── io_token_ratio_by_model_team.png

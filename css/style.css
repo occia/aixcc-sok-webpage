@@ -267,6 +267,10 @@ section > mjx-container[display="true"] {
   margin-right: 1rem;
 }
 
+.hero .meta a.pending {
+  color: var(--text-muted);
+}
+
 /* sections */
 section {
   margin-top: 3rem;
